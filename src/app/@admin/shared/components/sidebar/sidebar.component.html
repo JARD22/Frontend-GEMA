@@ -1,0 +1,132 @@
+  <!-- ======== sidebar-nav start =========== -->
+  <aside class="sidebar-nav-wrapper">
+    <div class="navbar-logo">
+      <a href="index.html">
+        <!-- <img src="assets/images/logo/logo.svg" alt="logo" /> -->
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item active">
+          <a [routerLink]="['/admin']" >
+            <span class="icon"><i class="mdi mdi-home"></i></span>
+            <span class="text">Inicio</span>
+          </a>
+        </li>
+        
+        <li class="nav-item nav-item-has-children">
+          <a
+            href="#0"
+            class="collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#ddmenu_2"
+            aria-controls="ddmenu_2"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="icon"><i class="lni lni-layout"></i></span>
+            <span class="text">Matricula</span>
+          </a>
+          <ul id="ddmenu_2" class="collapse dropdown-nav">
+            <li>
+              <a [routerLink]="['/admin/nueva-matricula']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Nueva Matricula
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/admin/listado-alumnos']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Expedientes
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item nav-item-has-children">
+          <a
+            href="#0"
+            class="collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#ddmenu_3"
+            aria-controls="ddmenu_3"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="icon"><i class="mdi mdi-account-group"></i></span>
+            <span class="text">Personas</span>
+          </a>
+          <ul id="ddmenu_3" class="collapse dropdown-nav">
+            <li>
+              <a [routerLink]="['/admin/nueva-persona']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Nueva persona
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/admin/listado']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Editar datos
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item nav-item-has-children">
+          <a
+            href="#0"
+            class="collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#ddmenu_4"
+            aria-controls="ddmenu_4"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="icon"><i class="mdi mdi-key-outline"></i></span>
+            <span class="text">Administración</span>
+          </a>
+          <ul id="ddmenu_4" class="collapse dropdown-nav">
+            <li>
+              <a [routerLink]="['/admin/contratos']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Contratos
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/admin/cursos-secciones']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Cursos y Secciones
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/admin/nuevo-usuario']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Nuevo Usuario
+              </a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/admin/parametros']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Parámetros
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/admin/roles']" routerLinkActive="router-link-active" >
+                <i class="lni lni-arrow-right"></i> Roles
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        
+        <li class="nav-item">
+          <a [routerLink]="['/admin/reportes']">
+            <span class="icon"><i class="mdi mdi-chart-bar"></i></span>
+            <span class="text">Reportes</span>
+          </a>
+        </li>
+
+       
+
+        
+      </ul>
+    </nav>
+  </aside>
+  
+  <div class="overlay"></div>
+  <!-- ======== sidebar-nav end =========== -->

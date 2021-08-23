@@ -1,0 +1,28 @@
+<!-- <h1>Admin</h1>
+<ul>
+    <li>
+        <a [routerLink]="['/login']" routerLinkActive="router-link-active"> Volver a Home</a> 
+    </li>
+    <li>
+        <a [routerLink]="['/admin']" routerLinkActive="router-link-active">Dashboard</a> 
+    </li>
+    <li>
+        <a [routerLink]="['/admin/usuarios']" routerLinkActive="router-link-active">Users</a> 
+    </li>
+</ul> -->
+<app-sidebar></app-sidebar>
+<main class="main-wrapper">
+
+    <app-header></app-header>
+
+    <section>
+        <div class="container-fluid">
+            <app-title></app-title>
+            <div class="invoice-wrapper">
+                <router-outlet></router-outlet>
+               
+            </div>
+
+        </div>
+    </section>
+</main>

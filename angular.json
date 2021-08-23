@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Fronted-Gema"
+    }
+  },
+  "defaultProject": "Fronted-Gema",
+  "cli": {
+    "analytics": false
+  }
 }
