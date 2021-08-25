@@ -1,1 +1,149 @@
-<p>parametros works!</p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-style mb-30 shadow-sm p-3 mb-5 bg-body rounded">
+            <div class="title d-flex flex-wrap align-items-center justify-content-between mb-30">
+                <div class="left">
+                <h3>Parámetros</h3>
+                </div>
+                <div class="right">
+                    <div class="input-style-1">
+                        <input type="text" placeholder="Buscar Usuario"/>
+                      </div>
+                </div>
+
+            </div>
+
+            <div class="table-wrapper table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th><h6>#</h6></th>
+                      <th><h6>Campo</h6></th>
+                      <th><h6>Acción</h6></th>
+                      
+                    </tr>
+                    <!-- end table row-->
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="min-width">
+                        <p>1</p>
+                        </div>
+                      </td>
+                      <td class="min-width">
+                        <p>Intentos Login</p>
+                      </td>
+                    
+                      
+                        <td class="min-width">
+                          <span class="status-btn light-btn pointer"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#exampleModal"
+                                data-bs-whatever="@mdo">
+                              <i class="mdi mdi-pencil"></i>
+                            </span>
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <td>
+                        <div class="min-width">
+                        <p>1</p>
+                        </div>
+                      </td>
+                      <td class="min-width">
+                        <p>Correo Electrónico</p>
+                      </td>
+                    
+                      
+                        <td class="min-width">
+                          <span class="status-btn light-btn pointer"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#CorreoModal"
+                                data-bs-whatever="@mdo">
+                              <i class="mdi mdi-pencil"></i>
+                            </span>
+                      </td>
+                    </tr>
+                  
+                   
+                    <!-- end table row -->
+
+                   
+                  </tbody>
+                </table>
+                <!-- end table -->
+             
+              </div>
+  
+              <div class="row">
+                  <div class="col">
+                      <a href="#0" class="main-btn light-btn rounded-md btn-hover mr-5">Anterior</a>
+                      <a href="#0" class="main-btn light-btn rounded-md btn-hover">Siguiente</a>
+                  </div>
+              </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL EDICION DE NOMBRE Y DESCRIPCION -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Intentos Inicio Sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="input-style-1">
+                <label>Intentos</label>
+                <input type="text" placeholder="Número de intentos" />
+                <small>Número de intentos permitidos para el inicio de sesión</small>
+            </div>
+         
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn primary-btn">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- MODAL CORREO -->
+<div class="modal fade" id="CorreoModal" tabindex="-1" aria-labelledby="CorreoModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CorreoModalLabel">Correo Electrónico</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="input-style-1">
+                <label>Correo</label>
+                <input type="text" placeholder="Correo" />
+                <small>Correo electrónico para el envío de correos automáticos</small>
+            </div>
+        
+            <div class="input-style-1">
+                <label>Contraseña</label>
+                <input type="text" placeholder="Contraseña"/>
+            </div>
+        
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn primary-btn">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -3,11 +3,14 @@
         <div class="card-style mb-30 shadow-sm p-3 mb-5 bg-body rounded">
             <div class="title d-flex flex-wrap align-items-center justify-content-between mb-30">
                 <div class="left">
-                <h3>Usuarios</h3>
+                    <a href="#0" class="main-btn active-btn rounded-md btn-hover" 
+                                 data-bs-toggle="modal" 
+                                 data-bs-target="#exampleModal"
+                                 data-bs-whatever="@mdo"><i class="mdi mdi-plus"></i>Nuevo Curso</a>
                 </div>
                 <div class="right">
                     <div class="input-style-1">
-                        <input type="text" placeholder="Buscar Usuario"/>
+                        <input type="text" placeholder="Buscar curso"/>
                       </div>
                 </div>
 
@@ -20,8 +23,8 @@
                       <th><h6>#</h6></th>
                       <th><h6>Nombre</h6></th>
                       <th><h6>Estado</h6></th>
-                      <th><h6>Rol</h6></th>
-                      <th><h6>Acción</h6></th>
+                      <th><h6>Accion</h6></th>
+                      <th><h6>Secciones</h6></th>
                     </tr>
                     <!-- end table row-->
                   </thead>
@@ -33,22 +36,20 @@
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>Esther Howard</p>
+                        <p>Bachillerato Técnico Profesional en contaduria y finanzas</p>
                       </td>
                       <td class="min-width">
-                        <p>Activo</p>
+                        <p><a href="#0">Activo</a></p>
                       </td>
 
                       <td class="min-width">
-                        <p>MATRICULA_ROL</p>
+                        <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
                       </td>
                       
                         <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
+                          <span [routerLink]="['/admin/secciones']" class="status-btn light-btn pointer">
+                              <i class="mdi mdi-dots-horizontal"></i>
                             </span>
                       </td>
                     </tr>
@@ -59,24 +60,22 @@
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>Esther Howard</p>
+                        <p>Octavo</p>
                       </td>
                       <td class="min-width">
-                        <p>Activo</p>
+                        <p><a href="#0">Activo</a></p>
                       </td>
 
                       <td class="min-width">
-                        <p>MATRICULA_ROL</p>
+                        <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
                       </td>
                       
                         <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
+                            <span [routerLink]="['/admin/secciones']" class="status-btn light-btn pointer">
+                                <i class="mdi mdi-dots-horizontal"></i>
+                              </span>
+                        </td>
                     </tr>
                     <tr>
                       <td>
@@ -85,24 +84,22 @@
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>Esther Howard</p>
+                        <p>Bachillerato Técnico Profesional en Informática</p>
                       </td>
                       <td class="min-width">
-                        <p>Activo</p>
+                        <p><a href="#0">Activo</a></p>
                       </td>
 
                       <td class="min-width">
-                        <p>REPORTES_ROL</p>
+                        <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
                       </td>
                       
                         <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
+                            <span [routerLink]="['/admin/secciones']" class="status-btn light-btn pointer">
+                                <i class="mdi mdi-dots-horizontal"></i>
+                              </span>
+                        </td>
                     </tr>
                     <tr>
                       <td>
@@ -111,24 +108,22 @@
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>Esther Howard</p>
+                        <p>Bachillerato en Ciencias y Humanidades</p>
                       </td>
                       <td class="min-width">
-                        <p>Activo</p>
+                        <p><a href="#0">Activo</a></p>
                       </td>
 
                       <td class="min-width">
-                        <p>MATRICULA_ROL</p>
+                        <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
                       </td>
                       
                         <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
+                            <span [routerLink]="['/admin/secciones']" class="status-btn light-btn pointer">
+                                <i class="mdi mdi-dots-horizontal"></i>
+                              </span>
+                        </td>
                     </tr>
                     <tr>
                       <td>
@@ -137,26 +132,23 @@
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>Esther Howard</p>
+                        <p>Séptimo</p>
                       </td>
                       <td class="min-width">
-                        <p>Activo</p>
+                        <p><a href="#0">Activo</a></p>
                       </td>
 
                       <td class="min-width">
-                        <p>ADMIN_ROL</p>
+                        <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
                       </td>
                       
                         <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
+                            <span [routerLink]="['/admin/secciones']" class="status-btn light-btn pointer">
+                                <i class="mdi mdi-dots-horizontal"></i>
+                              </span>
+                        </td>
                     </tr>
-                   
                     <!-- end table row -->
 
                    
@@ -183,32 +175,25 @@
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Contrato</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Curso</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
             <div class="input-style-1">
                 <label>Nombre</label>
-                <input type="text" placeholder="Nombre" disabled="True"/>
+                <input type="text" placeholder="Nombre" />
             </div>
-            <div class="select-style-1">
-
-                <div class="select-position">
-                    <select>
-                        <option value="">Selecciona un rol</option>
-                        <option value="">ADMIN_ROLE</option>
-                        <option value="">MATRICULA_ROL</option>
-                        <option value="">REPORTES_ROL</option>
-                    </select>
-                </div>
+            <div class="input-style-1">
+                <label>Desripción</label>
+                <input type="text" placeholder="contenido" />
             </div>
 
             <div class="select-style-1">
 
                 <div class="select-position">
                     <select>
-                        <option value="">Selecciona un Estado</option>
+                        <option value="">Selecciona un estado</option>
                         <option value="">Activo</option>
                         <option value="">Inactivo</option>
                     

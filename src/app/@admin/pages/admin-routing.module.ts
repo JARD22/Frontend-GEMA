@@ -41,7 +41,7 @@ const routes: Routes = [
       },
       {
         path:'cursos-secciones',
-        loadChildren:()=>import('./cursos-secciones/cursos-secciones.module').then(m=>m.CursosSeccionesModule)
+        loadChildren:()=>import('./cursos/cursos-secciones.module').then(m=>m.CursosSeccionesModule)
       },
       {
         path:'pantallas-rol',
@@ -62,6 +62,22 @@ const routes: Routes = [
       {
         path:'clausulas-contrato',
         loadChildren:()=>import('./clausulas-contrato/clausulas-contrato.module').then(m=>m.ClausulasContratoModule)
+      },
+      {
+        path:'secciones',
+        loadChildren:()=>import('./secciones/secciones.module').then(m=>m.SeccionesModule)
+      },
+      {
+        path:'persona',
+        loadChildren:()=>import('./persona/persona.module').then(m=>m.PersonaModule)
+      },
+      {
+        path:'lista-personas',
+        loadChildren:()=>import('./lista-personas/lista-personas.module').then(m=>m.ListaPersonasModule)
+      },
+      {
+        path:'colegios',
+        loadChildren:()=>import('./colegios/colegios.module').then(m=>m.ColegiosModule)
       },
       {
         path:'**',
