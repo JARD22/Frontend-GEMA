@@ -78,7 +78,9 @@
                         <div
                           class="text-start text-md-end text-lg-start text-xxl-end mb-30"
                         >
-                          <a href="#0">Olvidé mi contraseña</a>
+                          <a class="pointer"
+                          data-bs-toggle="modal" 
+                          data-bs-target="#exampleModal">Olvidé mi contraseña</a>
                         </div>
                       </div>
                       <!-- end col -->
@@ -108,4 +110,40 @@
         </div>
       </section>
       <!-- ========== signin-section end ========== -->
+
+          <!-- MODAL VERIFICACION DE CORREO  -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Verificación de correo</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+
+                    <div class="input-style-1">
+                        <label>Escribe el correo eletrónico registrado en el sistema</label>
+                       
+                    </div>
+
+                    <div class="input-style-1">
+                        <label>Correo eletrónico</label>
+                        <input type="password" placeholder="Correo eletrónico" />
+                    </div>
+                                  
+                  </form>
+                  <div class="alert-box primary-alert pl-100">
+                  
+                  
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn primary-btn">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- FIN VERIFICACION DE CORREO  -->
 

@@ -80,10 +80,14 @@ const routes: Routes = [
         loadChildren:()=>import('./colegios/colegios.module').then(m=>m.ColegiosModule)
       },
       {
+        path:'cuenta',
+        loadChildren:()=>import('./configuracion-cuenta/configuracion-cuenta.module').then(m=>m.ConfiguracionCuentaModule)
+      },
+      {
         path:'**',
         redirectTo:'admin',
         pathMatch:'full'
-      }
+      },
     ]
   },
 

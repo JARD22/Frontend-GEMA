@@ -12,12 +12,12 @@ const routes: Routes = [
         loadChildren:()=> import('./login/login.module').then(m=>m.LoginModule)
       },
       {
-        path:'forgot-pwd',
-        loadChildren:()=>import('./forgot-password/forgot-password.module').then(m=>m.ForgotPasswordModule)
-      },
-      {
         path:'no-page-found',
         loadChildren:()=> import('./no-page-found/no-page-found.module').then(m=>m.NoPageFoundModule)
+      },
+      {
+        path:'cambio-contrasena',
+        loadChildren:()=>import('./cambio-contrasena/cambio-contrasena.module').then(m=>m.CambioContrasenaModule)
       },
       {
         path:'**',

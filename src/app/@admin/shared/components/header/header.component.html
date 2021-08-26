@@ -41,24 +41,12 @@
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="profile"
               >
+               
                 <li>
-                  <a href="#0">
-                    <i class="lni lni-user"></i> View Profile
-                  </a>
+                  <a [routerLink]="['/admin/cuenta']"> <i class="mdi mdi-cog"></i>Configuración</a>
                 </li>
                 <li>
-                  <a href="#0">
-                    <i class="lni lni-alarm"></i> Notifications
-                  </a>
-                </li>
-                <li>
-                  <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                </li>
-                <li>
-                  <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                </li>
-                <li>
-                  <a [routerLink]="['/login']"> <i class="lni lni-exit"></i> Sign Out </a>
+                  <a [routerLink]="['/login']"> <i class="lni lni-exit"></i> Cerrar Sesión </a>
                 </li>
               </ul>
             </div>

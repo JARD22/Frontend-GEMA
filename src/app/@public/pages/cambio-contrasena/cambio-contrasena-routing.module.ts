@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ForgotPasswordComponent } from './forgot-password.component';
+import { CambioContrasenaComponent } from './cambio-contrasena.component';
 
 const routes: Routes = [
   {
     path:'',
-    component:ForgotPasswordComponent
+    component:CambioContrasenaComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ForgotPasswordRoutingModule { }
+export class CambioContrasenaRoutingModule { }
