@@ -41,19 +41,21 @@
                   <p class="text-sm mb-25">
                     
                   </p>
-                  <form action="#">
+                  <form [formGroup]="loginForm" 
+                        (ngSubmit)="login()"
+                        autocomplete="off">
                     <div class="row">
                       <div class="col-12">
                         <div class="input-style-1">
                           <label>Correo</label>
-                          <input type="email" placeholder="Correo" />
+                          <input type="email" placeholder="Correo" formControlName="usuario"/>
                         </div>
                       </div>
                       <!-- end col -->
                       <div class="col-12">
                         <div class="input-style-1">
                           <label>Contraseña</label>
-                          <input type="password" placeholder="Contraseña" />
+                          <input type="password" placeholder="Contraseña" formControlName="contrasena"/>
                         </div>
                       </div>
                       <!-- end col -->
@@ -64,6 +66,7 @@
                             type="checkbox"
                             value=""
                             id="checkbox-remember"
+                            formControlName="recordarme"
                           />
                           <label
                             class="form-check-label"
@@ -89,9 +92,9 @@
                           class="button-group d-flex justify-content-center flex-wrap"
                         >
                           <button
-                          type="button"
+                          type="submit"
                             class="main-btn primary-btn btn-hover w-100 text-center"
-                            [routerLink]="['/admin']" routerLinkActive="router-link-active" 
+                            
                           >
                             Iniciar Sesión
                           </button>
@@ -120,7 +123,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <!-- <form> -->
 
                     <div class="input-style-1">
                         <label>Escribe el correo eletrónico registrado en el sistema</label>
@@ -132,7 +135,7 @@
                         <input type="password" placeholder="Correo eletrónico" />
                     </div>
                                   
-                  </form>
+                  <!-- </form> -->
                   <div class="alert-box primary-alert pl-100">
                   
                   
