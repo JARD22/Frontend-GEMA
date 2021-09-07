@@ -16,14 +16,14 @@ export class UsuarioService {
 
       }
 
+  // Recibe un    
  login(formData:LoginForm){
   return this.http.post(`${this.base_url}/login/`,formData)
   .pipe(
     tap((resp:any)=>{
       sessionStorage.setItem('auth',resp.token)
     })
-    
-  )
+    )
  }  
  
  renovarToken():Observable<boolean>{
@@ -39,4 +39,4 @@ export class UsuarioService {
             
  }
 
-}
+};
