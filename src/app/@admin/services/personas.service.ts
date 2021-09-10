@@ -41,4 +41,8 @@ export class PersonasService {
     return this.http.post(`${this.url}/personas/familiar`,formData,this.headers)
   }
 
+  personaAlumno(formData){
+    return this.http.post(`${this.url}/personas/alumno`,formData,this.headers)
+  }
+
 }

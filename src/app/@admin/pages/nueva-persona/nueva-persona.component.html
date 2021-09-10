@@ -26,64 +26,103 @@
 <div class="row" *ngIf="cod_tipo_persona.value==4">
     <div class="col-lg-12">
         <!-- input style start -->
-        <div class="card-style mb-30">
+        
+        <form [formGroup]="alumnoForm" (ngSubmit)="enviarFormulario()">
+            <div class="card-style mb-30">
+
             <h6 class="mb-25">Datos Alumno</h6>
+            <div class="title d-flex flex-wrap align-items-center justify-content-between">
+                <div class="left">
+                    <div class="input-style-1">
+                        <label>Grupo Familiar<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="grupo familiar" formControlName="grupo"
+                                class="form-control"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('grupo')">campo requerido o no válido</small>
+                        <small class="text-danger" *ngIf="grupoNoValido('grupo')">Grupo familiar no puede ser igual al número de identidad</small>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="select-style-1">
+                        <label>Vive con<small class="text-danger">*</small></label>
+                        <div class="select-position">
+                            <select formControlName="vive_con">
+                                <option value="">Selecciona una opción</option>
+                                <option value="P">PADRE</option>
+                                <option value="M">MADRE</option>
+                                <option value="E">ENCARGADO</option>
+
+                            </select>
+                            <small class="text-danger" *ngIf="campoNoValidoA('vive_con')">campo requerido o no válido</small>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Nombre</label>
-                        <input type="text" placeholder="Primer Nombre" 
+                        <label>Primer Nombre<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Nombre" formControlName="primer_nombre"
                                 class="form-control"/>
-                        
+                                <small class="text-danger" *ngIf="campoNoValidoA('primer_nombre')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Nombre</label>
-                        <input type="text" placeholder="Segundo Nombre" autocomplete="off" />
+                        <input type="text" placeholder="Segundo Nombre" formControlName="segundo_nombre"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('segundo_nombre')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Apellido</label>
-                        <input type="text" placeholder="Primer Apellido" />
+                        <label>Primer Apellido<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Apellido" formControlName="primer_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('primer_apellido')">campo requerido o no válido</small>
+                        
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Apellido</label>
-                        <input type="text" placeholder="Segundo Apellido" />
+                        <input type="text" placeholder="Segundo Apellido" formControlName="segundo_apellido" />
+                        <small class="text-danger" *ngIf="campoNoValidoA('segundo_apellido')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
 
 
                     <div class="input-style-1">
-                        <label>Número de identidad</label>
-                        <input type="text" placeholder="Numero de identidad" />
+                        <label>Número de identidad<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Numero de identidad" formControlName="dni"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('dni')">campo requerido o no válido</small>
+                        
                     </div>
 
                     <div class="input-style-1">
-                        <label>Nacionalidad</label>
-                        <input type="text" placeholder="Nacionalidad" />
+                        <label>Nacionalidad<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Nacionalidad" formControlName="nacionalidad" />
+                        <small class="text-danger" *ngIf="campoNoValidoA('nacionalidad')">campo requerido o no válido</small>
+                        
                     </div>
-
-
                 </div>
                 <div class="col-lg-3">
 
                     <div class="input-style-2">
-                        <label>Fecha de Nacimiento</label>
-                        <input type="date" />
+                        <label>Fecha de Nacimiento<small class="text-danger">*</small></label>
+                        <input type="date" formControlName="fecha_nacimiento"/>
                         <span class="icon"><i class="lni lni-chevron-down"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoA('fecha_nacimiento')">campo requerido o no válido</small>
+                        
                     </div>
                     <div class="select-style-1">
-                        <label>Sexo:</label>
+                        <label>Sexo<small class="text-danger">*</small></label>
                         <div class="select-position">
-                            <select>
+                            <select formControlName="sexo">
                                 <option value="">Selecciona una opción</option>
-                                <option value="">F</option>
-                                <option value="">M</option>
-
+                                <option value="F">F</option>
+                                <option value="M">M</option>
                             </select>
+                            <small class="text-danger" *ngIf="campoNoValidoA('sexo')">campo requerido o no válido</small>
+                        
                         </div>
                     </div>
                 </div>
@@ -92,18 +131,35 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-style-3">
-                        <textarea placeholder="Dirección" rows="5"></textarea>
+                        <textarea placeholder="Dirección" rows="5" formControlName="direccion"></textarea>
                         <span class="icon"><i class="lni lni-text-format"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoA('direccion')">campo requerido o no válido</small>
+                        
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="input-style-3">
-                        <textarea placeholder="Obsevaciones" rows="5"></textarea>
+                        <textarea placeholder="Obsevaciones" rows="5" formControlName="enfermedad" ></textarea>
                         <span class="icon"><i class="lni lni-text-format"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoA('enfermedad')">campo requerido o no válido</small>
                     </div>
                 </div>
             </div>
-        </div>
+        
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="submit"
+                    class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</button>
+                </div>
+            </div>
+            </div>
+        </form>
+
+        <!-- <span>VALIDO</span>
+        <pre>{{alumnoForm.valid}}</pre>
+        <hr>
+        <span>VALOR</span>
+        <pre>{{alumnoForm.value|json}}</pre> -->
         <!-- end card -->
         <!-- ======= input style end ======= -->
     </div>
@@ -120,7 +176,7 @@
                     <h6 class="mb-25">Datos</h6>
                 </div>
                 <div class="right">
-                    <div class="form-check checkbox-style mb-20 mt-2" *ngIf="cod_tipo_persona != 3">
+                    <div class="form-check checkbox-style mb-20 mt-2" *ngIf="cod_tipo_persona.value != 3">
                         <input class="form-check-input" type="checkbox"
                                 checked="false"
                                value="" id="checkbox-1" formControlName="encargado"
@@ -133,37 +189,44 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Nombre</label>
+                        <label>Primer Nombre <small class="text-danger">*</small></label>
                         <input type="text" placeholder="Primer Nombre" formControlName="primer_nombre"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('primer_nombre')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Nombre</label>
                         <input type="text" placeholder="Segundo Nombre" formControlName="segundo_nombre" />
+                        <small class="text-danger" *ngIf="campoNoValidoF('segundo_nombre')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Apellido</label>
+                        <label>Primer Apellido <small class="text-danger">*</small></label>
                         <input type="text" placeholder="Primer Apellido" formControlName="primer_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('primer_apellido')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Apellido</label>
                         <input type="text" placeholder="Segundo Apellido" formControlName="segundo_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('segundo_apellido')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
 
 
                     <div class="input-style-1">
-                        <label>Número de identidad</label>
+                        <label>Número de identidad <small class="text-danger">*</small><small>(sin guiones)</small> </label>
                         <input type="text" placeholder="Numero de identidad" formControlName="dni"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('dni')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
-                        <label>Nacionalidad</label>
+                        <label>Nacionalidad<small class="text-danger">*</small></label>
                         <input type="text" placeholder="Nacionalidad" formControlName="nacionalidad"/>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('nacionalidad')">campo requerido o no válido</small>
                     </div>
 
 
@@ -171,19 +234,39 @@
                 <div class="col-lg-3">
 
                     <div class="input-style-2">
-                        <label>Fecha de Nacimiento</label>
+                        <label>Fecha de Nacimiento<small class="text-danger">*</small></label>
                         <input type="date" formControlName="fecha_nacimiento" />
                         <span class="icon"><i class="lni lni-chevron-down"></i></span>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('fecha_nacimiento')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
-                        <label>Escolaridad</label>
+                        <label>Escolaridad<small class="text-danger">*</small></label>
                         <input type="text" placeholder="Escolaridad"formControlName="escolaridad" />
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('escolaridad')">campo requerido o no válido</small>
+                    </div>
+
+                    <div class="select-style-1">
+
+                        <div class="select-position" *ngIf="cod_tipo_persona.value ==3">
+                            <label>Sexo<small class="text-danger">*</small></label>
+                            <select formControlName="sexo">
+                                <option value="">Selecciona un tipo</option>
+                                <option value="F">F</option>
+                                <option value="M">M</option>
+                                
+                            </select>
+                            
+                        <small class="text-danger" *ngIf="campoNoValidoF('sexo')">campo requerido o no válido</small>
+                        </div>
                     </div>
 
                 </div>
 
             </div>
+
             <hr class="divider">
             <div class="row">
                 <div class="col-lg-6">
@@ -191,16 +274,22 @@
                     <div class="input-style-3">
                         <textarea placeholder="Dirección" rows="5" formControlName="direccion"></textarea>
                         <span class="icon"><i class="lni lni-text-format"></i></span>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('direccion')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Lugar de trabajo</label>
+                        <label>Lugar de trabajo<small class="text-danger">*</small></label>
                         <input type="text" placeholder="Lugar de trabajo" formControlName="lugar_trabajo"/>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('lugar_trabajo')">campo requerido o no válido</small>
                     </div>
                     <div class="input-style-1">
-                        <label>Ocupación</label>
+                        <label>Ocupación<small class="text-danger">*</small></label>
                         <input type="text" placeholder="Ocupación" formControlName="ocupacion"/>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('ocupacion')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -213,9 +302,12 @@
                     <div class="input-style-1 mt-5 ">
                         <label>Unir a grupo familiar</label>
                         <input type="text"  placeholder="Grupo Familiar" formControlName="grupo"/>
+                        <small class="text-danger" *ngIf="validarGrupo('grupo')">Debes crear un grupo o unir a un grupo esta persona</small>
                     </div>
                 </div>
             </div>
+
+            
 
 
             <hr class="divider">
@@ -223,7 +315,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="left">Número de teléfono</div>
+                        <div class="left">Número de teléfono <small class="text-danger">*</small></div>
 
                     </div>
                 </div>
@@ -293,11 +385,11 @@
                     </div>
                 </div>
             </div>
-            <span>VALIDO</span>
+            <!-- <span>VALIDO</span>
             <pre>{{familiarForm.valid}}</pre>
             <hr>
             <span>VALOR</span>
-            <pre>{{familiarForm.value|json}}</pre>
+            <pre>{{familiarForm.value|json}}</pre> -->
         </div>
 
     </div>
@@ -494,11 +586,11 @@
                     </div>
                 </div>
 
-                <span>VALID</span>
+                <!-- <span>VALID</span>
                 <pre>{{usuarioForm.valid}}</pre>
 
                 <span>VALOR FORMULARIO</span>
-                <pre>{{usuarioForm.value|json}}</pre>
+                <pre>{{usuarioForm.value|json}}</pre> -->
             </div>
        
         </form>
