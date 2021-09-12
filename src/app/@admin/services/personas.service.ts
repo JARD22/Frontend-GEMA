@@ -45,4 +45,12 @@ export class PersonasService {
     return this.http.post(`${this.url}/personas/alumno`,formData,this.headers)
   }
 
+  listaPersonas(offset:number){
+    return this.http.get(`${this.url}/personas/${offset}`,this.headers)
+  }
+
+  personaPorId(uid:string){
+    return this.http.get(`${this.url}/personas/persona-id/${uid}`,this.headers);
+  }
+
 }

@@ -26,93 +26,24 @@
                   <!-- end table row-->
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr *ngFor="let persona of listaPersonas; let i =index">
                     <td>
                       <div class="min-width">
-                      <p>1</p>
+                      <p>{{i+1}}</p>
                       </div>
                     </td>
                     <td class="min-width">
-                      <p>Esther Howard</p>
+                      <p>{{persona.out_nombre}}</p>
                     </td>
                     <td class="min-width">
-                      <p><a href="#0">Alumno</a></p>
+                      <p><a href="#0">{{persona.out_tipo_persona}}</a></p>
                     </td>
                    
                       <td class="min-width">
-                        <span [routerLink]="['/admin/persona']" class="status-btn primary-btn"><i class="mdi mdi-pencil"></i></span>
+                        <span [routerLink]="['/admin/persona', persona.out_uid]" [queryParams]="{tipo:persona.out_cod_tipo_persona}" class="status-btn primary-btn"><i class="mdi mdi-pencil"></i></span>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="min-width">
-                      <p>2</p>
-                      </div>
-                    </td>
-                    <td class="min-width">
-                      <p>Esther Howard</p>
-                    </td>
-                    <td class="min-width">
-                      <p><a href="#0">Madre</a></p>
-                    </td>
-                   
-                      <td class="min-width">
-                        <span [routerLink]="['/admin/persona']" class="status-btn primary-btn"><i class="mdi mdi-pencil"></i></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="min-width">
-                      <p>3</p>
-                      </div>
-                    </td>
-                    <td class="min-width">
-                      <p>Esther Howard</p>
-                    </td>
-                    <td class="min-width">
-                      <p><a href="#0">Padre</a></p>
-                    </td>
-                   
-                      <td class="min-width">
-                        <span [routerLink]="['/admin/persona']" class="status-btn primary-btn"><i class="mdi mdi-pencil"></i></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="min-width">
-                      <p>4</p>
-                      </div>
-                    </td>
-                    <td class="min-width">
-                      <p>Esther Howard</p>
-                    </td>
-                    <td class="min-width">
-                      <p><a href="#0">Encargado</a></p>
-                    </td>
-                   
-                      <td class="min-width">
-                        <span [routerLink]="['/admin/persona']" class="status-btn primary-btn"><i class="mdi mdi-pencil"></i></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="min-width">
-                      <p>5</p>
-                      </div>
-                    </td>
-                    <td class="min-width">
-                      <p>Esther Howard</p>
-                    </td>
-                    <td class="min-width">
-                      <p><a href="#0">Alumno</a></p>
-                    </td>
-                   
-                      <td class="min-width">
-                        <span [routerLink]="['/admin/persona']" class="status-btn primary-btn"><i class="mdi mdi-pencil"></i></span>
-                    </td>
-                  </tr>
-                  <!-- end table row -->
-
+               
                   
                   <!-- end table row -->
                  
@@ -124,8 +55,8 @@
 
             <div class="row">
                 <div class="col">
-                    <a href="#0" class="main-btn light-btn rounded-full btn-hover mr-5">Anterior</a>
-                    <a href="#0" class="main-btn light-btn rounded-full btn-hover">Siguiente</a>
+                    <a type="button" (click)="cambiarPagina(-10)" class="main-btn light-btn rounded-full btn-hover mr-5">Anterior</a>
+                    <a type="button" (click)="cambiarPagina(10)" class="main-btn light-btn rounded-full btn-hover">Siguiente</a>
                 </div>
             </div>
           </div>

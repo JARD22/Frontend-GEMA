@@ -1,64 +1,105 @@
 
 <!-- DATOS DEL ALUMNO -->
-<div class="row">
+<div class="row" *ngIf="cod_tipo_persona==4">
     <div class="col-lg-12">
         <!-- input style start -->
-        <div class="card-style mb-30">
+        
+        <form [formGroup]="alumnoForm" (ngSubmit)="enviarFormulario()">
+            <div class="card-style mb-30">
+
             <h6 class="mb-25">Datos Alumno</h6>
+            <div class="title d-flex flex-wrap align-items-center justify-content-between">
+                <div class="left">
+                    <div class="input-style-1">
+                        <label>Grupo Familiar<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="grupo familiar" formControlName="grupo"
+                                class="form-control"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('grupo')">campo requerido o no válido</small>
+                        <small class="text-danger" *ngIf="grupoNoValido('grupo')">Grupo familiar no puede ser igual al número de identidad</small>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="select-style-1">
+                        <label>Vive con<small class="text-danger">*</small></label>
+                        <div class="select-position">
+                            <select formControlName="vive_con">
+                                <option value="">Selecciona una opción</option>
+                                <option value="P">PADRE</option>
+                                <option value="M">MADRE</option>
+                                <option value="E">ENCARGADO</option>
+
+                            </select>
+                            <small class="text-danger" *ngIf="campoNoValidoA('vive_con')">campo requerido o no válido</small>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Nombre</label>
-                        <input type="text" placeholder="Primer Nombre" />
+                        <label>Primer Nombre<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Nombre" formControlName="primer_nombre"
+                                class="form-control"/>
+                                <small class="text-danger" *ngIf="campoNoValidoA('primer_nombre')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Nombre</label>
-                        <input type="text" placeholder="Segundo Nombre" autocomplete="off" />
+                        <input type="text" placeholder="Segundo Nombre" formControlName="segundo_nombre"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('segundo_nombre')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Apellido</label>
-                        <input type="text" placeholder="Primer Apellido" />
+                        <label>Primer Apellido<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Apellido" formControlName="primer_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('primer_apellido')">campo requerido o no válido</small>
+                        
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Apellido</label>
-                        <input type="text" placeholder="Segundo Apellido" />
+                        <input type="text" placeholder="Segundo Apellido" formControlName="segundo_apellido" />
+                        <small class="text-danger" *ngIf="campoNoValidoA('segundo_apellido')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
 
 
                     <div class="input-style-1">
-                        <label>Número de identidad</label>
-                        <input type="text" placeholder="Numero de identidad" />
+                        <label>Número de identidad<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Numero de identidad" formControlName="dni"/>
+                        <small class="text-danger" *ngIf="campoNoValidoA('dni')">campo requerido o no válido</small>
+                        
                     </div>
 
                     <div class="input-style-1">
-                        <label>Nacionalidad</label>
-                        <input type="text" placeholder="Nacionalidad" />
+                        <label>Nacionalidad<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Nacionalidad" formControlName="nacionalidad" />
+                        <small class="text-danger" *ngIf="campoNoValidoA('nacionalidad')">campo requerido o no válido</small>
+                        
                     </div>
-
-
                 </div>
                 <div class="col-lg-3">
 
                     <div class="input-style-2">
-                        <label>Fecha de Nacimiento</label>
-                        <input type="date" />
+                        <label>Fecha de Nacimiento<small class="text-danger">*</small></label>
+                        <input type="date" formControlName="fecha_nacimiento"/>
                         <span class="icon"><i class="lni lni-chevron-down"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoA('fecha_nacimiento')">campo requerido o no válido</small>
+                        
                     </div>
                     <div class="select-style-1">
-                        <label>Sexo:</label>
+                        <label>Sexo<small class="text-danger">*</small></label>
                         <div class="select-position">
-                            <select>
+                            <select formControlName="sexo">
                                 <option value="">Selecciona una opción</option>
-                                <option value="">F</option>
-                                <option value="">M</option>
-
+                                <option value="F">F</option>
+                                <option value="M">M</option>
                             </select>
+                            <small class="text-danger" *ngIf="campoNoValidoA('sexo')">campo requerido o no válido</small>
+                        
                         </div>
                     </div>
                 </div>
@@ -67,35 +108,56 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-style-3">
-                        <textarea placeholder="Dirección" rows="5"></textarea>
+                        <textarea placeholder="Dirección" rows="5" formControlName="direccion"></textarea>
                         <span class="icon"><i class="lni lni-text-format"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoA('direccion')">campo requerido o no válido</small>
+                        
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="input-style-3">
-                        <textarea placeholder="Obsevaciones" rows="5"></textarea>
+                        <textarea placeholder="Obsevaciones" rows="5" formControlName="enfermedad" ></textarea>
                         <span class="icon"><i class="lni lni-text-format"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoA('enfermedad')">campo requerido o no válido</small>
                     </div>
                 </div>
             </div>
-        </div>
+        
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="submit"
+                    class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</button>
+                </div>
+            </div>
+            </div>
+        </form>
+
+        <!-- <span>VALIDO</span>
+        <pre>{{alumnoForm.valid}}</pre>
+        <hr>
+        <span>VALOR</span>
+        <pre>{{alumnoForm.value|json}}</pre> -->
         <!-- end card -->
         <!-- ======= input style end ======= -->
     </div>
 </div>
 <!-- FIN DATOS DEL ALUMNO -->
 
-<!-- DATOS DEL PADRE -->
-<div class="row">
+<!-- DATOS DEL FAMILIAR -->
+<div class="row" *ngIf="cod_tipo_persona==1 ||cod_tipo_persona== 2 ||cod_tipo_persona==3">
+   <form  [formGroup]="familiarForm" (ngSubmit)="enviarFormulario()" autocomplete="off">
     <div class="col-lg-12">
         <div class="card-style mb-30">
             <div class="title d-flex flex-wrap align-items-center justify-content-between">
                 <div class="left">
-                    <h6 class="mb-25">Datos Padre</h6>
+                    <h6 class="mb-25">Datos</h6>
                 </div>
                 <div class="right">
-                    <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
+                    <div class="form-check checkbox-style mb-20 mt-2" *ngIf="cod_tipo_persona != 3">
+                        <input class="form-check-input" type="checkbox"
+                                checked="false"
+                               value="" id="checkbox-1" formControlName="encargado"
+                                />
                         <label class="form-check-label" for="checkbox-1">
                             Encargado</label>
                     </div>
@@ -104,37 +166,44 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Nombre</label>
-                        <input type="text" placeholder="Primer Nombre" />
+                        <label>Primer Nombre <small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Nombre" formControlName="primer_nombre"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('primer_nombre')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Nombre</label>
-                        <input type="text" placeholder="Segundo Nombre" autocomplete="off" />
+                        <input type="text" placeholder="Segundo Nombre" formControlName="segundo_nombre" />
+                        <small class="text-danger" *ngIf="campoNoValidoF('segundo_nombre')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Apellido</label>
-                        <input type="text" placeholder="Primer Apellido" />
+                        <label>Primer Apellido <small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Apellido" formControlName="primer_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('primer_apellido')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Apellido</label>
-                        <input type="text" placeholder="Segundo Apellido" />
+                        <input type="text" placeholder="Segundo Apellido" formControlName="segundo_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('segundo_apellido')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
 
 
                     <div class="input-style-1">
-                        <label>Número de identidad</label>
-                        <input type="text" placeholder="Numero de identidad" />
+                        <label>Número de identidad <small class="text-danger">*</small><small>(sin guiones)</small> </label>
+                        <input type="text" placeholder="Numero de identidad" formControlName="dni"/>
+                        <small class="text-danger" *ngIf="campoNoValidoF('dni')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
-                        <label>Nacionalidad</label>
-                        <input type="text" placeholder="Nacionalidad" />
+                        <label>Nacionalidad<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Nacionalidad" formControlName="nacionalidad"/>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('nacionalidad')">campo requerido o no válido</small>
                     </div>
 
 
@@ -142,443 +211,172 @@
                 <div class="col-lg-3">
 
                     <div class="input-style-2">
-                        <label>Fecha de Nacimiento</label>
-                        <input type="date" />
+                        <label>Fecha de Nacimiento<small class="text-danger">*</small></label>
+                        <input type="date" formControlName="fecha_nacimiento" />
                         <span class="icon"><i class="lni lni-chevron-down"></i></span>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('fecha_nacimiento')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
-                        <label>Número de identidad hijo(a)</label>
-                        <input type="text" placeholder="Número de identidad hijo(a)" />
+                        <label>Escolaridad<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Escolaridad"formControlName="escolaridad" />
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('escolaridad')">campo requerido o no válido</small>
+                    </div>
+
+                    <div class="select-style-1">
+
+                        <div class="select-position" *ngIf="cod_tipo_persona.value ==3">
+                            <label>Sexo<small class="text-danger">*</small></label>
+                            <select formControlName="sexo">
+                                <option value="">Selecciona un tipo</option>
+                                <option value="F">F</option>
+                                <option value="M">M</option>
+                                
+                            </select>
+                            
+                        <small class="text-danger" *ngIf="campoNoValidoF('sexo')">campo requerido o no válido</small>
+                        </div>
                     </div>
 
                 </div>
 
             </div>
+
             <hr class="divider">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-check checkbox-style mb-20">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Copiar dirección del alumno</label>
-                    </div>
+                    
                     <div class="input-style-3">
-                        <textarea placeholder="Dirección" rows="5"></textarea>
+                        <textarea placeholder="Dirección" rows="5" formControlName="direccion"></textarea>
                         <span class="icon"><i class="lni lni-text-format"></i></span>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('direccion')">campo requerido o no válido</small>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Lugar de trabajo</label>
-                        <input type="text" placeholder="Lugar de trabajo" />
+                        <label>Lugar de trabajo<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Lugar de trabajo" formControlName="lugar_trabajo"/>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('lugar_trabajo')">campo requerido o no válido</small>
                     </div>
                     <div class="input-style-1">
-                        <label>Ocupación</label>
-                        <input type="text" placeholder="Ocupación" />
+                        <label>Ocupación<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Ocupación" formControlName="ocupacion"/>
+                        
+                        <small class="text-danger" *ngIf="campoNoValidoF('ocupacion')">campo requerido o no válido</small>
                     </div>
                 </div>
+                <!-- <div class="col-lg-3">
+                    <div class="form-check input-style check-style  mt-5" >
+                        <input class="form-check-input" type="checkbox" 
+                               value="" id="checkbox-2" formControlName="crear_grupo" />
+                        <label class="form-check-label" for="checkbox-2">
+                            Crear Grupo Familiar</label>
+                    </div>
+                    <div class="input-style-1 mt-5 ">
+                        <label>Unir a grupo familiar</label>
+                        <input type="text"  placeholder="Grupo Familiar" formControlName="grupo"/>
+                        <small class="text-danger" *ngIf="validarGrupo('grupo')">Debes crear un grupo o unir a un grupo esta persona</small>
+                    </div>
+                </div> -->
             </div>
 
+ <hr class="divider">
 
-            <hr class="divider">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="left">Número de teléfono</div>
+                        <div class="left">Número de teléfono <small class="text-danger">*</small></div>
 
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+             <div formArrayName="telefonosFamiliar">
+                <div *ngFor="let telefono of telFmlControls; let i = index">
+                    <div  [formGroupName]="i">
+
+                    <div class="row">
                 <div class="col-lg-5">
                     <div class="input-group mb-3 input-style-1">
 
                         <input type="text" class="form-control" placeholder="Número de teléfono"
-                            aria-label="Número de telefono" aria-describedby="button-addon2">
-                        <button class="main-btn danger-btn rounded-md btn-hover" type="button"
-                            id="button-addon2">Eliminar</button>
+                               aria-label="Número de telefono" aria-describedby="button-addon2"
+                               formControlName="telefono">
+                        <button class="main-btn danger-btn rounded-md btn-hover" 
+                                type="button" (click)="eliminarTelefonoF(i)"
+                                id="button-addon2">Eliminar</button>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="select-style-1">
 
                         <div class="select-position">
-                            <select>
+                            <select formControlName="cod_tipo_telefono">
                                 <option value="">Selecciona un tipo</option>
-                                <option value="">Alumno</option>
-                                <option value="">Madre</option>
-                                <option value="">Padre</option>
-                                <option value="">Encargado</option>
-
+                                <option value="1">CASA</option>
+                                <option value="2">CELULAR</option>
+                                
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-3"
+                               formControlName="whatsapp" />
+                        <label class="form-check-label" for="checkbox-3">
                             Whatsapp</label>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-4"
+                                formControlName="emergencia"/>
+                        <label class="form-check-label" for="checkbox-4">
                             Emergencia</label>
                     </div>
                 </div>
-            </div>
+                    </div>
 
+                    </div>
+                </div>
+            </div>
+            
             <div class="row">
-                <div class="right"> <a href="#0" class="main-btn primary-btn rounded-md btn-hover">Agregar teléfono</a>
+                <div class="right"> <button type="button"
+                                             class="main-btn primary-btn rounded-md btn-hover"
+                                             (click)="agregartelefonoF()">Agregar teléfono</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="left"> <a href="#0"
-                            class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</a>
+                    <div class="left"> <button type="submit"
+                            class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</button>
                     </div>
                 </div>
             </div>
+            <!-- <span>VALIDO</span>
+            <pre>{{familiarForm.valid}}</pre>
+            <hr>
+            <span>VALOR</span>
+            <pre>{{familiarForm.value|json}}</pre> -->
         </div>
 
     </div>
+</form>
 </div>
 <!--FIN DATOS DEL PADRE -->
 
-<!-- DATOS DE LA MADRE -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card-style mb-30">
-            <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                <div class="left">
-                    <h6 class="mb-25">Datos Madre</h6>
-                </div>
-                <div class="right">
-                    <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Encargado</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="input-style-1">
-                        <label>Primer Nombre</label>
-                        <input type="text" placeholder="Primer Nombre" />
-                    </div>
-
-                    <div class="input-style-1">
-                        <label>Segundo Nombre</label>
-                        <input type="text" placeholder="Segundo Nombre" autocomplete="off" />
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="input-style-1">
-                        <label>Primer Apellido</label>
-                        <input type="text" placeholder="Primer Apellido" />
-                    </div>
-
-                    <div class="input-style-1">
-                        <label>Segundo Apellido</label>
-                        <input type="text" placeholder="Segundo Apellido" />
-                    </div>
-                </div>
-                <div class="col-lg-3">
-
-
-                    <div class="input-style-1">
-                        <label>Número de identidad</label>
-                        <input type="text" placeholder="Numero de identidad" />
-                    </div>
-
-                    <div class="input-style-1">
-                        <label>Nacionalidad</label>
-                        <input type="text" placeholder="Nacionalidad" />
-                    </div>
-
-
-                </div>
-                <div class="col-lg-3">
-
-                    <div class="input-style-2">
-                        <label>Fecha de Nacimiento</label>
-                        <input type="date" />
-                        <span class="icon"><i class="lni lni-chevron-down"></i></span>
-                    </div>
-
-                    
-                    <div class="input-style-1">
-                        <label>Número de identidad hijo(a)</label>
-                        <input type="text" placeholder="Número de identidad hijo(a)" />
-                    </div>
-                </div>
-
-            </div>
-            <hr class="divider">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-check checkbox-style mb-20">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Copiar dirección del alumno</label>
-                    </div>
-                    <div class="input-style-3">
-                        <textarea placeholder="Dirección" rows="5"></textarea>
-                        <span class="icon"><i class="lni lni-text-format"></i></span>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="input-style-1">
-                        <label>Lugar de trabajo</label>
-                        <input type="text" placeholder="Lugar de trabajo" />
-                    </div>
-                    <div class="input-style-1">
-                        <label>Ocupación</label>
-                        <input type="text" placeholder="Ocupación" />
-                    </div>
-                </div>
-            </div>
-
-
-            <hr class="divider">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="left">Número de teléfono</div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="input-group mb-3 input-style-1">
-
-                        <input type="text" class="form-control" placeholder="Número de teléfono"
-                            aria-label="Número de telefono" aria-describedby="button-addon2">
-                        <button class="main-btn danger-btn rounded-md btn-hover" type="button"
-                            id="button-addon2">Eliminar</button>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="select-style-1">
-
-                        <div class="select-position">
-                            <select>
-                                <option value="">Selecciona un tipo</option>
-                                <option value="">Alumno</option>
-                                <option value="">Madre</option>
-                                <option value="">Padre</option>
-                                <option value="">Encargado</option>
-
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Whatsapp</label>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Emergencia</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="right"> <a href="#0" class="main-btn primary-btn rounded-md btn-hover">Agregar teléfono</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="left"> <a href="#0"
-                            class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<!-- FIN DATOS DE LA MADRE -->
-
-<!-- DATOS DEL ENCARGADO -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card-style mb-30">
-            <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                <div class="left">
-                    <h6 class="mb-25">Datos Encargado</h6>
-                </div>
-                <div class="right">
-                    <!-- <div class="form-check checkbox-style mb-20 mt-2">
-                    <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                    <label class="form-check-label" for="checkbox-1">
-                        Encargado</label>
-                </div> -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="input-style-1">
-                        <label>Primer Nombre</label>
-                        <input type="text" placeholder="Primer Nombre" />
-                    </div>
-
-                    <div class="input-style-1">
-                        <label>Segundo Nombre</label>
-                        <input type="text" placeholder="Segundo Nombre" autocomplete="off" />
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="input-style-1">
-                        <label>Primer Apellido</label>
-                        <input type="text" placeholder="Primer Apellido" />
-                    </div>
-
-                    <div class="input-style-1">
-                        <label>Segundo Apellido</label>
-                        <input type="text" placeholder="Segundo Apellido" />
-                    </div>
-                </div>
-                <div class="col-lg-3">
-
-
-                    <div class="input-style-1">
-                        <label>Número de identidad</label>
-                        <input type="text" placeholder="Numero de identidad" />
-                    </div>
-
-                    <div class="input-style-1">
-                        <label>Nacionalidad</label>
-                        <input type="text" placeholder="Nacionalidad" />
-                    </div>
-                </div>
-                <div class="col-lg-3">
-
-                    <div class="input-style-2">
-                        <label>Fecha de Nacimiento</label>
-                        <input type="date" />
-                        <span class="icon"><i class="lni lni-chevron-down"></i></span>
-                    </div>
-
-                    <div class="input-style-1">
-                        <label>Número de identidad alumno(a)</label>
-                        <input type="text" placeholder="Número de identidad alumno(a)" />
-                    </div>
-                </div>
-
-            </div>
-            <hr class="divider">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-check checkbox-style mb-20">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Copiar dirección del alumno</label>
-                    </div>
-                    <div class="input-style-3">
-                        <textarea placeholder="Dirección" rows="5"></textarea>
-                        <span class="icon"><i class="lni lni-text-format"></i></span>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="input-style-1">
-                        <label>Lugar de trabajo</label>
-                        <input type="text" placeholder="Lugar de trabajo" />
-                    </div>
-                    <div class="input-style-1">
-                        <label>Ocupación</label>
-                        <input type="text" placeholder="Ocupación" />
-                    </div>
-                </div>
-            </div>
-
-
-            <hr class="divider">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="left">Número de teléfono</div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="input-group mb-3 input-style-1">
-
-                        <input type="text" class="form-control" placeholder="Número de teléfono"
-                            aria-label="Número de telefono" aria-describedby="button-addon2">
-                        <button class="main-btn danger-btn rounded-md btn-hover" type="button"
-                            id="button-addon2">Eliminar</button>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="select-style-1">
-
-                        <div class="select-position">
-                            <select>
-                                <option value="">Selecciona un tipo</option>
-                                <option value="">Alumno</option>
-                                <option value="">Madre</option>
-                                <option value="">Padre</option>
-                                <option value="">Encargado</option>
-
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Whatsapp</label>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Emergencia</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="right"> <a href="#0" class="main-btn primary-btn rounded-md btn-hover">Agregar teléfono</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="left"> <a href="#0"
-                            class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<!--FIN DATOS DEL ENCARGADO -->
-
 
 <!-- USUARIO DEL SISTEMA -->
-<div class="row">
+<div class="row" *ngIf="cod_tipo_persona && cod_tipo_persona==5">
     <div class="col-lg-12">
         <div class="card-style mb-30">
+            <form [formGroup]="usuarioForm" (ngSubmit)="enviarFormulario()" autocomplete="off">
             <div class="title d-flex flex-wrap align-items-center justify-content-between">
                 <div class="left">
                     <h6 class="mb-25">Usuario</h6>
@@ -588,39 +386,51 @@
                 </div>
             </div>
             <div class="row">
+            
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Nombre</label>
-                        <input type="text" placeholder="Primer Nombre" />
+                        <label>Primer Nombre<small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Nombre" formControlName="primer_nombre" />
+                        <small class="text-danger" *ngIf="campoNoValidoU('primer_nombre')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Nombre</label>
-                        <input type="text" placeholder="Segundo Nombre" autocomplete="off" />
+                        <input type="text" placeholder="Segundo Nombre" formControlName="segundo_nombre" />
+                        <small class="text-danger" *ngIf="campoNoValidoU('segundo_nombre')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-style-1">
-                        <label>Primer Apellido</label>
-                        <input type="text" placeholder="Primer Apellido" />
+                        <label>Primer Apellido <small class="text-danger">*</small></label>
+                        <input type="text" placeholder="Primer Apellido" formControlName="primer_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoU('primer_apellido')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
                         <label>Segundo Apellido</label>
-                        <input type="text" placeholder="Segundo Apellido" />
+                        <input type="text" placeholder="Segundo Apellido" formControlName="segundo_apellido"/>
+                        <small class="text-danger" *ngIf="campoNoValidoU('segundo_apellido')">campo requerido o no válido</small>
                     </div>
                 </div>
                 <div class="col-lg-3">
 
 
                     <div class="input-style-1">
-                        <label>Número de identidad</label>
-                        <input type="text" placeholder="Numero de identidad" />
+                        <label>Número de identidad <small class="text-danger">*</small><small>(sin guiones)</small> </label>
+                       
+                        <input type="text" placeholder="Numero de identidad" formControlName="dni"/>
+                        <small class="text-danger" *ngIf="campoNoValidoU('dni')">campo requerido o no válido</small>
                     </div>
 
                     <div class="input-style-1">
-                        <label>Nacionalidad</label>
-                        <input type="text" placeholder="Nacionalidad" />
+                        <label>Nacionalidad <small class="text-danger">*</small></label>
+                        <input type="text" 
+                               class="form-control" 
+                               
+                               placeholder="Nacionalidad" 
+                               formControlName="nacionalidad"/>
+                        <small class="text-danger" *ngIf="campoNoValidoU('nacionalidad')">campo requerido o no válido</small>
                     </div>
 
 
@@ -628,10 +438,43 @@
                 <div class="col-lg-3">
 
                     <div class="input-style-2">
-                        <label>Fecha de Nacimiento</label>
-                        <input type="date" />
+                        <label>Fecha de Nacimiento <small class="text-danger">*</small></label>
+                        <input type="date"
+                               class="form-control"
+                               formControlName="fecha_nacimiento"
+                               
+                               />
                         <span class="icon"><i class="lni lni-chevron-down"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoU('fecha_nacimiento')">campo requerido o no válido</small>
                     </div>
+
+                    <div class="select-style-1">
+                        <div class="select-position" >
+                            <label>Sexo <small class="text-danger">*</small></label>
+                            <select class="form-select" 
+                                    formControlName="sexo"
+                                   >
+                                <option value="">Seleccionar</option>
+                                <option value="F">F</option>
+                                <option value="M">M</option>
+                            </select>
+                        </div>
+                        <small class="text-danger" *ngIf="campoNoValidoU('sexo')">campo requerido o no válido</small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="input-style-1">
+                            <label>correo <small class="text-danger">*</small></label>
+                            <small>correo que será utilizado en el sistema</small>
+                            <input type="text" placeholder="correo" formControlName="correo"/>
+                            <small class="text-danger" *ngIf="campoNoValidoU('correo')">campo requerido o no válido</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-2"></div>
                 </div>
 
             </div>
@@ -644,20 +487,12 @@
                             Copiar dirección del alumno</label> -->
                     </div>
                     <div class="input-style-3">
-                        <textarea placeholder="Dirección" rows="5"></textarea>
+                        <textarea placeholder="Dirección" rows="5" formControlName="direccion"></textarea>
                         <span class="icon"><i class="lni lni-text-format"></i></span>
+                        <small class="text-danger" *ngIf="campoNoValidoU('direccion')">campo requerido o no válido</small>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <!-- <div class="input-style-1">
-                        <label>Lugar de trabajo</label>
-                        <input type="text" placeholder="Lugar de trabajo" />
-                    </div>
-                    <div class="input-style-1">
-                        <label>Ocupación</label>
-                        <input type="text" placeholder="Ocupación" />
-                    </div> -->
-                </div>
+           
             </div>
 
 
@@ -665,64 +500,74 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="left">Número de teléfono</div>
+                        <div class="left">Número de teléfono <small class="text-danger">*</small></div>
 
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-5">
+            <div formArrayName="telefonosUsuario">
+                <div *ngFor="let telefono of telUsrControls; let i = index">
+                <div  [formGroupName]="i">
+            <div class="row" >
+                <div class="col-lg-5" >
                     <div class="input-group mb-3 input-style-1">
+                        
+                        <input type="text" 
+                                formControlName="telefono"
+                                class="form-control" 
+                                placeholder="Número de teléfono"
+                                aria-label="Número de telefono" 
+                                aria-describedby="button-addon2">
 
-                        <input type="text" class="form-control" placeholder="Número de teléfono"
-                            aria-label="Número de telefono" aria-describedby="button-addon2">
-                        <button class="main-btn danger-btn rounded-md btn-hover" type="button"
-                            id="button-addon2">Eliminar</button>
+                        <button class="main-btn danger-btn rounded-md btn-hover" 
+                                type="button"
+                                (click)="eliminarTelefonoUsr(i)"
+                                id="button-addon2">Eliminar</button>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="select-style-1">
-
-                        <div class="select-position">
-                            <select>
+                        <div class="select-position" >
+                            <select formControlName="cod_tipo_telefono">
                                 <option value="">Selecciona un tipo</option>
-                                <option value="">Alumno</option>
-                                <option value="">Madre</option>
-                                <option value="">Padre</option>
-                                <option value="">Encargado</option>
-
+                                <option value="1">CASA</option>
+                                <option value="2">CELULAR</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <!-- <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Whatsapp</label>
-                    </div> -->
+                 
                 </div>
                 <div class="col-lg-2">
-                    <!-- <div class="form-check checkbox-style mb-20 mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" />
-                        <label class="form-check-label" for="checkbox-1">
-                            Emergencia</label>
-                    </div> -->
+                   
                 </div>
             </div>
+            </div>
+        </div>
+    </div> 
 
             <div class="row">
-                <div class="right"> <a href="#0" class="main-btn primary-btn rounded-md btn-hover">Agregar teléfono</a>
+                <div class="right"> <a type="button" class="main-btn primary-btn rounded-md btn-hover" (click)="agregartelefonoUsr()">Agregar teléfono</a>
                 </div>
+
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="left"> <a href="#0"
-                            class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</a>
+                    <div class="left"> <button type="submit"
+                            class="main-btn primary-btn rounded-md btn-hover float-end">Guardar</button>
                     </div>
                 </div>
+
+                <!-- <span>VALID</span>
+                <pre>{{usuarioForm.valid}}</pre>
+
+                <span>VALOR FORMULARIO</span>
+                <pre>{{usuarioForm.value|json}}</pre> -->
             </div>
+       
+        </form>
         </div>
 
     </div>

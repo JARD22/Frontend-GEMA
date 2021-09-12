@@ -70,7 +70,7 @@ const routes: Routes = [
         loadChildren:()=>import('./secciones/secciones.module').then(m=>m.SeccionesModule)
       },
       {
-        path:'persona',
+        path:'persona/:uid',
         loadChildren:()=>import('./persona/persona.module').then(m=>m.PersonaModule)
       },
       {

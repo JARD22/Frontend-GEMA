@@ -60,7 +60,7 @@ export class NuevaPersonaComponent implements OnInit {
                 primer_apellido:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
                 segundo_nombre:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
                 segundo_apellido:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-                encargado:[''],
+                encargado:[false],
                 ocupacion:['',Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}$")],
                 lugar_trabajo:['',[Validators.required,Validators.minLength(4),Validators.pattern('^[ A-Z a-z 0-9 . _ % + - , ; # ÁÉÍÓÚáéíóúÑñ()]{2,250}$')]],
                 escolaridad:['',[Validators.required,Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
@@ -68,7 +68,7 @@ export class NuevaPersonaComponent implements OnInit {
                 sexo:['',[Validators.required,Validators.minLength(1)]],
                 fecha_nacimiento:['',[Validators.required]],
                 direccion:['',[Validators.required,Validators.maxLength(250),Validators.pattern('^[ A-Z a-z 0-9 . _ % + - , ; # ÁÉÍÓÚáéíóúÑñ()]{2,250}$')]],
-                crear_grupo:[''],
+                crear_grupo:[false],
                 grupo:[''],
                 telefonosFamiliar:this.fb.array([])
               });
@@ -193,8 +193,8 @@ export class NuevaPersonaComponent implements OnInit {
     return this.fb.group({
       telefono:['',Validators.required],
       cod_tipo_telefono:['',Validators.required],
-      whatsapp:[''],
-      emergencia:['']
+      whatsapp:[false],
+      emergencia:[false]
     });
   };
 
@@ -307,16 +307,16 @@ asignarValores(){
     //Asignando sexo segun numero de persona
     if (n==1) {
       this.familiarForm.patchValue({'sexo':'M'})
-      this.familiarForm.patchValue({'encargado':''})
+      this.familiarForm.patchValue({'encargado':false})
     }
     if (n==2) {
       this.familiarForm.patchValue({'sexo':'F'})
-      this.familiarForm.patchValue({'encargado':''})
+      this.familiarForm.patchValue({'encargado':false})
     }
 
     //asignando encargado 
     if (n==3) {
-      this.familiarForm.patchValue({'encargado':'true'})
+      this.familiarForm.patchValue({'encargado':true})
       this.familiarForm.patchValue({'sexo':''})
     }
   }) 
