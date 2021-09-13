@@ -53,4 +53,8 @@ export class PersonasService {
     return this.http.get(`${this.url}/personas/persona-id/${uid}`,this.headers);
   }
 
+  actualizarFamiliar(formData){
+    return this.http.patch(`${this.url}/personas/actualizar-familiar`,formData,this.headers);
+  }
+
 }
