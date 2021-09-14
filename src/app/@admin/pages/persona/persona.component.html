@@ -307,7 +307,7 @@
                                aria-label="Número de telefono" aria-describedby="button-addon2"
                                formControlName="telefono">
                         <button class="main-btn danger-btn rounded-md btn-hover" 
-                                type="button" (click)="eliminarTelefonoF(i)"
+                                type="button" (click)="eliminarTelefonoF(i,telefono.get('cod_telefono').value)"
                                 id="button-addon2">Eliminar</button>
                     </div>
                 </div>

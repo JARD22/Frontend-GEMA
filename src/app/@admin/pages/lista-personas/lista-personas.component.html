@@ -9,7 +9,7 @@
                 <div class="right">
 
                         <div class="input-style-1">
-                        <input type="text" placeholder="Buscar"/>
+                        <input type="text" placeholder="Buscar" (keyup)="buscarPorTermino($event.target.value)"/>
                       </div>
                   <!-- end select -->
                 </div>
@@ -53,7 +53,7 @@
            
             </div>
 
-            <div class="row">
+            <div class="row" *ngIf="botones">
                 <div class="col">
                     <a type="button" (click)="cambiarPagina(-10)" class="main-btn light-btn rounded-full btn-hover mr-5">Anterior</a>
                     <a type="button" (click)="cambiarPagina(10)" class="main-btn light-btn rounded-full btn-hover">Siguiente</a>

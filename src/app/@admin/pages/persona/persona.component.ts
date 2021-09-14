@@ -187,9 +187,27 @@ this.alumnoForm=this.fb.group({
     });
   };
 
-  eliminarTelefonoF(i:number){
+  eliminarTelefonoF(i:number,id:number){
+    
     this.telefonosFamiliar = this.familiarForm.get('telefonosFamiliar') as FormArray;
+  
+    Swal.fire({
+      title: 'Confirmar',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+     
+    }).then((result) => {
+     
+      if (result.isConfirmed) {
     this.telefonosFamiliar.removeAt(i);
+  
+    this.personaService.eliminarTelefono(id).subscribe((resp:any)=>{
+      Swal.fire('Hecho', resp.msg, 'success');
+    },error=>Swal.fire('Error',error.error.msg,'error'))
+      } 
+    })
+    
     //SI LA CANTIDAD DE CONTROLES ES 0 SE AGREGA 1 PARA LA VALIDACION DEL FORMULARIO
   if(this.telefonosFamiliar.length==0){
     this.telefonosFamiliar.push(this.crearTelefonoF());
@@ -300,7 +318,7 @@ enviarFormulario(){
             icon: 'success',
             text: resp.msg
           });
-         
+          
         },(error:any)=>{
           Swal.fire({
             title: 'Error',

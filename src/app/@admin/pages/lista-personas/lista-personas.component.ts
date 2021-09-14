@@ -17,6 +17,7 @@ export class ListaPersonasComponent implements OnInit {
 
   public listaPersonas:any[]=[]
   desde:number=0
+  public botones =true
 
   ngOnInit(): void {
   
@@ -41,5 +42,20 @@ export class ListaPersonasComponent implements OnInit {
     }
     
     this.cargarLista();
+  }
+
+  buscarPorTermino(termino){
+ 
+    if (termino.length==0) {
+      this.botones=true
+      return
+    }
+    this.personaService.busquedaPersona(termino).subscribe(
+      (resp:any)=>{
+        this.listaPersonas=resp.persona
+        this.botones=false
+      }
+     
+    )
   }
 }

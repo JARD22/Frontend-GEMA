@@ -57,4 +57,12 @@ export class PersonasService {
     return this.http.patch(`${this.url}/personas/actualizar-familiar`,formData,this.headers);
   }
 
+  eliminarTelefono(id:number){
+    return this.http.delete(`${this.url}/personas/eliminar-telefono/${id}`,this.headers);
+  }
+
+  busquedaPersona(termino:string){
+    return this.http.get(`${this.url}/personas/busqueda/${termino}`);
+  }
+
 }
