@@ -65,4 +65,12 @@ export class PersonasService {
     return this.http.get(`${this.url}/personas/busqueda/${termino}`);
   }
 
+alumnoPorId(uid:string){
+return this.http.get(`${this.url}/personas/alumno-id/${uid}`,this.headers)
+}
+
+actualizarAlumno(formData){
+  return this.http.patch(`${this.url}/personas/actualizar-alumno`,formData,this.headers)
+}
+
 }

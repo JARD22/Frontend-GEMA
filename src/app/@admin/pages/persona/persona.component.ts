@@ -22,13 +22,17 @@ export class PersonaComponent implements OnInit {
   public familiarForm:FormGroup;
   public alumnoForm:FormGroup;
 
+  public retiro=false;
+
   telefonosUsuario:FormArray;
   telefonosFamiliar:FormArray;
 
 
   constructor( private route:ActivatedRoute,private fb:FormBuilder,
               private personaService:PersonasService) { 
-
+                
+                
+                
 //======================================USUARIO==========================================================
 this.usuarioForm= this.fb.group({
   cod_tipo_persona:[this.cod_tipo_persona,[Validators.required]],
@@ -49,30 +53,11 @@ this.agregartelefonoUsr();
 
 //======================================FIN USUARIO==========================================================  
 
-//=========================================ALUMNO=============================================================
-
-this.alumnoForm=this.fb.group({
-  cod_tipo_persona:[this.cod_tipo_persona,[Validators.required]],
-  dni:['',[Validators.required,Validators.minLength(13)]],
-  primer_nombre:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-  primer_apellido:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-  segundo_nombre:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-  segundo_apellido:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-  nacionalidad:['',[Validators.required,Validators.minLength(6),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-  sexo:['',[Validators.required,Validators.minLength(1)]],
-  fecha_nacimiento:['',[Validators.required]],
-  direccion:['',[Validators.required,Validators.maxLength(250),Validators.pattern('^[ A-Z a-z 0-9 . _ % + - , ; # ÁÉÍÓÚáéíóúÑñ()]{2,250}$')]],
-  grupo:['',[Validators.required,Validators.maxLength(13)]],
-  enfermedad:['',[Validators.required,Validators.pattern('^[ A-Z a-z 0-9 . _ % + - , ; # ÁÉÍÓÚáéíóúÑñ()]{2,250}$')]],
-  vive_con:['',Validators.required]
-                })
-//=========================================FIN ALUMNO=========================================================
 
 
   }
 
   ngOnInit(): void {
-
     
     //======================================ENCARGADO==========================================================              
     this.familiarForm= this.fb.group({
@@ -93,13 +78,34 @@ this.alumnoForm=this.fb.group({
       telefonosFamiliar:this.fb.array([])
     });
     
-    
     //======================================FIN ENCARGADO==========================================================              
-    this.route.params.subscribe( x=>  this.cargarDatos(x.uid));
-        
     
+//=========================================ALUMNO=============================================================
+
+this.alumnoForm=this.fb.group({
+  uid:['',Validators.required],
+  cod_tipo_persona:[this.cod_tipo_persona,[Validators.required]],
+  dni:['',[Validators.required,Validators.minLength(13)]],
+  primer_nombre:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+  primer_apellido:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+  segundo_nombre:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+  segundo_apellido:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+  nacionalidad:['',[Validators.required,Validators.minLength(6),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+  sexo:['',[Validators.required,Validators.minLength(1)]],
+  fecha_nacimiento:['',[Validators.required]],
+  direccion:['',[Validators.required,Validators.maxLength(250),Validators.pattern('^[ A-Z a-z 0-9 . _ % + - , ; # ÁÉÍÓÚáéíóúÑñ()]{2,250}$')]],
+  enfermedad:['',[Validators.required,Validators.pattern('^[ A-Z a-z 0-9 . _ % + - , ; # ÁÉÍÓÚáéíóúÑñ()]{2,250}$')]],
+  vive_con:['',Validators.required],
+  estado:['',Validators.required],
+  motivo_retiro:['']
+                })
+//=========================================FIN ALUMNO=========================================================
+
+
+    this.route.params.subscribe( x=>  this.cargarDatos(x.uid));    
     this.route.queryParams.subscribe(x=>this.cod_tipo_persona=x.tipo)
 
+  
   }
     //==========================================================================================================================================
   //                      TELEFONOS USUARIO
@@ -219,6 +225,7 @@ this.alumnoForm=this.fb.group({
   //==========================================================================================================================================
   
   grupoNoValido(campo:string):boolean{
+
     if (this.alumnoForm.get(campo).value ==this.alumnoForm.get('dni').value && this.alumnoForm.get('dni').dirty) {
       return true
     }else{
@@ -244,14 +251,34 @@ this.alumnoForm=this.fb.group({
           this.familiarForm.patchValue({'escolaridad':resp.persona[0].out_escolaridad});
           this.familiarForm.patchValue({'nacionalidad':resp.persona[0].out_nacionalidad});
           this.familiarForm.patchValue({'sexo':resp.persona[0].out_sexo});
-          this.familiarForm.patchValue({'fecha_nacimiento':resp.persona[0].out_fec_nacimiento});
+          this.familiarForm.patchValue({'fecha_nacimiento':this.formatDate(resp.persona[0].out_fec_nacimiento)});
           this.familiarForm.patchValue({'direccion':resp.persona[0].out_direccion});
           this.familiarForm.setControl('telefonosFamiliar',this.setTelefonos(resp.persona[0].out_telefonos))
     
     } else if(this.cod_tipo_persona==4){
-      
-    }else{
 
+      this.personaService.alumnoPorId(uid).subscribe((resp:any)=>{
+        
+        
+        this.alumnoForm.patchValue({
+          uid:uid,
+          cod_tipo_persona:resp.alumno[0].out_cod_tipo_persona,
+          dni:resp.alumno[0].out_dni,
+          fecha_nacimiento:this.formatDate(resp.alumno[0].out_fec_nacimiento),
+          primer_nombre:resp.alumno[0].out_primer_nombre,
+          primer_apellido:resp.alumno[0].out_primer_apellido,
+          segundo_nombre:resp.alumno[0].out_segundo_nombre,
+          segundo_apellido:resp.alumno[0].out_segundo_apellido,
+          nacionalidad:resp.alumno[0].out_nacionalidad,
+          direccion:resp.alumno[0].out_direccion,
+          enfermedad:resp.alumno[0].out_enfermedad,
+          vive_con:resp.alumno[0].out_vive_con,
+          sexo:resp.alumno[0].out_sexo,
+          estado:resp.alumno[0].out_estado,
+          motivo_retiro:resp.alumno[0].out_motivo_retiro
+        });
+        this.validarRetiro()
+      })
     }
     
   })
@@ -294,21 +321,22 @@ enviarFormulario(){
       // )
     }
   } else if(this.cod_tipo_persona==4 && this.alumnoForm.valid) {
-    // this.personaService.personaAlumno(this.alumnoForm.value).subscribe(
-    //   (resp:any)=>{
-    //     Swal.fire({
-    //       title: 'Hecho',
-    //       icon: 'success',
-    //       text: resp.msg
-    //     });
-    //   },(error:any)=>{
-    //     Swal.fire({
-    //       title: 'Error',
-    //       icon: 'error',
-    //       text: error.error.msg
-    //     });
-    //   }
-    // )
+    
+    this.personaService.actualizarAlumno(this.alumnoForm.value).subscribe(
+      (resp:any)=>{
+        Swal.fire({
+          title: 'Hecho',
+          icon: 'success',
+          text: resp.msg
+        });
+      },(error:any)=>{
+        Swal.fire({
+          title: 'Error',
+          icon: 'error',
+          text: error.error.msg
+        });
+      }
+    )
   }else{
     if (this.familiarForm.valid) {
       this.personaService.actualizarFamiliar(this.familiarForm.value).subscribe(
@@ -332,6 +360,41 @@ enviarFormulario(){
 
 }
 
+formatDate(fecha){
+  let fws = fecha.split('T')
+  let f = fws[fws.length-2]
+  return f
 
+}
+
+validarRetiro(){
+
+
+let valor = this.alumnoForm.get('estado').value 
+
+if (valor==true) {
+  console.log('es verdadero')
+  this.retiro=false
+  this.alumnoForm.get('motivo_retiro').clearValidators();
+  this.alumnoForm.get('motivo_retiro').updateValueAndValidity();
+} else {
+  this.retiro=true
+  this.alumnoForm.get('motivo_retiro').setValidators([Validators.required,Validators.minLength(6)]);
+  this.alumnoForm.get('motivo_retiro').updateValueAndValidity();
+}
+
+
+  this.alumnoForm.get('estado').valueChanges.subscribe((x:any)=>{
+       if (x=='true') {
+      this.retiro=false
+      this.alumnoForm.get('motivo_retiro').clearValidators();
+      this.alumnoForm.get('motivo_retiro').updateValueAndValidity();
+    } else {
+      this.retiro=true
+      this.alumnoForm.get('motivo_retiro').setValidators([Validators.required,Validators.minLength(6)]);
+      this.alumnoForm.get('motivo_retiro').updateValueAndValidity();
+    }
+  })
+}
 
 }
