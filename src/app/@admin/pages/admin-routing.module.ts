@@ -66,7 +66,7 @@ const routes: Routes = [
         loadChildren:()=>import('./clausulas-contrato/clausulas-contrato.module').then(m=>m.ClausulasContratoModule)
       },
       {
-        path:'secciones',
+        path:'secciones/:id',
         loadChildren:()=>import('./secciones/secciones.module').then(m=>m.SeccionesModule)
       },
       {

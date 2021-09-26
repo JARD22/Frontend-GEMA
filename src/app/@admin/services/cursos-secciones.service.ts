@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,9 @@ export class CursosSeccionesService {
  buscarCurso(termino){
    return this.http.get(`${this.url}/cursos/buscar-curso/${termino}`,this.headers)
  }
+
+listaSecciones(curso,anio){
+  return this.http.get(`${this.url}/cursos/secciones/${curso}/${anio}`,this.headers)
+}
 
 }

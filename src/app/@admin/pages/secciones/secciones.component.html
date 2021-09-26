@@ -1,7 +1,36 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card-style mb-30 shadow-sm p-3 mb-5 bg-body rounded">
-            <div class="title d-flex flex-wrap align-items-center justify-content-between mb-30">
+
+            <div class="row">
+              <div class="col-lg-4">
+                <a href="#0" class="main-btn active-btn rounded-md btn-hover" 
+                data-bs-toggle="modal" 
+                data-bs-target="#exampleModal"
+                data-bs-whatever="@mdo"><i class="mdi mdi-plus"></i>Nueva sección</a>
+              </div>
+              <div class="col-lg-4">
+                <div class="select-style-1">
+
+                  <div class="select-position" >
+                      <select >
+                          <option value="">Selecciona un año</option>
+                          <option *ngFor="let anio of anios" value="">{{anio}}</option>
+                  
+                      
+  
+                      </select>
+                  </div>
+              </div>
+              </div>
+              <div class="col-lg-4">
+                <a href="#0" class="main-btn warning-btn rounded-md btn-hover float-end" 
+                data-bs-toggle="modal" 
+                data-bs-target="#UnirModal"
+                data-bs-whatever="@mdo"><i class="mdi mdi-source-merge"></i>Unir secciones</a>
+              </div>
+            </div>
+            <!-- <div class="title d-flex flex-wrap align-items-center justify-content-between mb-30">
                 <div class="left">
                     <a href="#0" class="main-btn active-btn rounded-md btn-hover" 
                                  data-bs-toggle="modal" 
@@ -9,13 +38,15 @@
                                  data-bs-whatever="@mdo"><i class="mdi mdi-plus"></i>Nueva sección</a>
                 </div>
                 <div class="right">
+
+                  
                     <a href="#0" class="main-btn warning-btn rounded-md btn-hover" 
                                  data-bs-toggle="modal" 
                                  data-bs-target="#UnirModal"
                                  data-bs-whatever="@mdo"><i class="mdi mdi-source-merge"></i>Unir secciones</a>
                 </div>
 
-            </div>
+            </div> -->
 
             <div class="table-wrapper table-responsive">
                 <table class="table">
@@ -24,6 +55,7 @@
                       <th><h6>#</h6></th>
                       <th><h6>Nombre</h6></th>
                       <th><h6>Estado</h6></th>
+                      <th><h6>Año</h6></th>
                       <th><h6>Cupos</h6></th>
                       <th><h6>Acción</h6></th>
                     </tr>
@@ -44,6 +76,11 @@
                       </td>
 
                       <td class="min-width">
+                          <p>2021</p>
+                        <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
+                      </td>
+                      <td class="min-width">
                           <p>35</p>
                         <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
                         <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
@@ -54,7 +91,7 @@
                                 data-bs-toggle="modal" 
                                 data-bs-target="#exampleModal"
                                 data-bs-whatever="@mdo">
-                              <i class="mdi mdi-dots-horizontal"></i>
+                              <i class="mdi mdi-pencil-outline"></i>
                             </span>
                       </td>
                     </tr>
@@ -73,6 +110,11 @@
                       </td>
 
                       <td class="min-width">
+                          <p>2021</p>
+                        <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
+                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
+                      </td>
+                      <td class="min-width">
                           <p>35</p>
                         <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
                         <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
@@ -83,7 +125,7 @@
                                 data-bs-toggle="modal" 
                                 data-bs-target="#exampleModal"
                                 data-bs-whatever="@mdo">
-                              <i class="mdi mdi-dots-horizontal"></i>
+                              <i class="mdi mdi-pencil-outline"></i>
                             </span>
                       </td>
                     </tr>
@@ -97,12 +139,7 @@
              
               </div>
   
-              <div class="row">
-                  <div class="col">
-                      <a href="#0" class="main-btn light-btn rounded-md btn-hover mr-5">Anterior</a>
-                      <a href="#0" class="main-btn light-btn rounded-md btn-hover">Siguiente</a>
-                  </div>
-              </div>
+             
 
         </div>
     </div>
@@ -118,7 +155,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+     
             <div class="input-style-1">
                 <label>Nombre</label>
                 <input type="text" placeholder="Nombre" />
@@ -140,7 +177,7 @@
                     </select>
                 </div>
             </div>
-          </form>
+    
         </div>
         <div class="modal-footer">
           <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
@@ -159,7 +196,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          
             <div class="select-style-1">
 
                 <div class="select-position">
@@ -186,7 +223,7 @@
                     </select>
                 </div>
             </div>
-          </form>
+      
         </div>
         <div class="modal-footer">
           <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
