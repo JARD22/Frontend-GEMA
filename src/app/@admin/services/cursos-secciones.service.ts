@@ -46,4 +46,17 @@ listaSecciones(curso,anio){
   return this.http.get(`${this.url}/cursos/secciones/${curso}/${anio}`,this.headers)
 }
 
+nuevaSeccion(formData){
+  return  this.http.post(`${this.url}/cursos/nueva-seccion`,formData,this.headers)
+}
+
+actualizarSeccion(formData){
+  return this.http.patch(`${this.url}/cursos/actualizar-seccion`,formData,this.headers)
+}
+
+unirSecciones(formData){
+  console.log('como putas no va a ser una funcion')
+  return this.http.post(`${this.url}/cursos/unir-secciones`,formData,this.headers);
+}
+
 }

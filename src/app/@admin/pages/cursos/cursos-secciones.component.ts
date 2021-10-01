@@ -59,7 +59,9 @@ if ( this.cursoForm.valid &&  this.formEnviado) {
 };
 
 cargarDatosCurso(id){
- this.cursoForm.addControl('cod_curso', new FormControl(this.listaCursos[id].out_cod_curso))
+ 
+
+  this.cursoForm.addControl('cod_curso', new FormControl(this.listaCursos[id].out_cod_curso))
  
  this.cursoForm.patchValue({'nombre':this.listaCursos[id].out_nombre})
  this.cursoForm.patchValue({'descripcion':this.listaCursos[id].out_descripcion})

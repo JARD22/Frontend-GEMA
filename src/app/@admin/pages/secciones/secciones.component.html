@@ -7,19 +7,19 @@
                 <a href="#0" class="main-btn active-btn rounded-md btn-hover" 
                 data-bs-toggle="modal" 
                 data-bs-target="#exampleModal"
-                data-bs-whatever="@mdo"><i class="mdi mdi-plus"></i>Nueva sección</a>
+                data-bs-whatever="@mdo"
+                (click)="resetForm()"><i class="mdi mdi-plus"></i>Nueva sección</a>
               </div>
               <div class="col-lg-4">
                 <div class="select-style-1">
-
+              
                   <div class="select-position" >
-                      <select >
+                
+                      <select id=anio (change)="seleccionAnio($event.target.value)" >
                           <option value="">Selecciona un año</option>
-                          <option *ngFor="let anio of anios" value="">{{anio}}</option>
-                  
-                      
-  
+                          <option *ngFor="let anio of anios" [value]="anio">{{anio}}</option>
                       </select>
+                      
                   </div>
               </div>
               </div>
@@ -30,23 +30,7 @@
                 data-bs-whatever="@mdo"><i class="mdi mdi-source-merge"></i>Unir secciones</a>
               </div>
             </div>
-            <!-- <div class="title d-flex flex-wrap align-items-center justify-content-between mb-30">
-                <div class="left">
-                    <a href="#0" class="main-btn active-btn rounded-md btn-hover" 
-                                 data-bs-toggle="modal" 
-                                 data-bs-target="#exampleModal"
-                                 data-bs-whatever="@mdo"><i class="mdi mdi-plus"></i>Nueva sección</a>
-                </div>
-                <div class="right">
-
-                  
-                    <a href="#0" class="main-btn warning-btn rounded-md btn-hover" 
-                                 data-bs-toggle="modal" 
-                                 data-bs-target="#UnirModal"
-                                 data-bs-whatever="@mdo"><i class="mdi mdi-source-merge"></i>Unir secciones</a>
-                </div>
-
-            </div> -->
+            
 
             <div class="table-wrapper table-responsive">
                 <table class="table">
@@ -62,32 +46,32 @@
                     <!-- end table row-->
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let seccion of listaSecciones; let i = index;">
                       <td>
                         <div class="min-width">
-                        <p>1</p>
+                        <p>{{i+1}}</p>
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>A</p>
+                        <p>{{seccion.out_nombre}}</p>
                       </td>
                       <td class="min-width">
-                        <p><a href="#0">Activo</a></p>
+                        <p *ngIf="seccion.out_estado==true"> <a >ACTIVO</a></p>
+                        <p *ngIf="seccion.out_estado==false"> <a >INACTIVO</a></p>
                       </td>
 
                       <td class="min-width">
-                          <p>2021</p>
-                        <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
+                          <p>{{seccion.out_anio}}</p>
+                        
                       </td>
                       <td class="min-width">
-                          <p>35</p>
-                        <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
+                          <p>{{seccion.out_cupos}}</p>
+        
                       </td>
                       
                         <td class="min-width">
                           <span class="status-btn light-btn pointer"
+                                (click)="actualizarSeccion(seccion)"
                                 data-bs-toggle="modal" 
                                 data-bs-target="#exampleModal"
                                 data-bs-whatever="@mdo">
@@ -95,41 +79,7 @@
                             </span>
                       </td>
                     </tr>
-                    
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>2</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>B</p>
-                      </td>
-                      <td class="min-width">
-                        <p><a href="#0">Activo</a></p>
-                      </td>
-
-                      <td class="min-width">
-                          <p>2021</p>
-                        <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
-                      </td>
-                      <td class="min-width">
-                          <p>35</p>
-                        <!-- <span class="status-btn primary-btn mr-5 pointer"><i class="mdi mdi-pencil-outline"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span> -->
-                      </td>
-                      
-                        <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil-outline"></i>
-                            </span>
-                      </td>
-                    </tr>
-                    
+                                       
                     <!-- end table row -->
 
                    
@@ -148,47 +98,56 @@
 
 <!-- MODAL EDICION DE NOMBRE Y DESCRIPCION -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
+    <form [formGroup]="seccionForm" (ngSubmit)="enviarForm()">  
+  <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Sección</h5>
+        
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-     
             <div class="input-style-1">
                 <label>Nombre</label>
-                <input type="text" placeholder="Nombre" />
+                <input type="text" placeholder="Nombre" formControlName="nombre" style="text-transform: uppercase;"/>
+                <small class="text-danger" *ngIf="campoNoValido('nombre')">campo requerido o no válido</small>
             </div>
             <div class="input-style-1">
                 <label>Cupos</label>
-                <input type="text" placeholder="Cupos" />
+                <input type="text" placeholder="Cupos" formControlName="cupos"/>
+                <small class="text-danger" *ngIf="campoNoValido('cupos')">campo requerido o no válido</small>
             </div>
 
             <div class="select-style-1">
 
                 <div class="select-position">
-                    <select>
+                  <label>Estado</label>
+                    <select formControlName="estado">
                         <option value="">Selecciona un estado</option>
-                        <option value="">Activo</option>
-                        <option value="">Inactivo</option>
-                    
-
+                        <option value="true">ACTIVO</option>
+                        <option value="false">INACTIVO</option>              
                     </select>
+                    <small class="text-danger" *ngIf="campoNoValido('estado')">campo requerido o no válido</small>
                 </div>
             </div>
-    
+            <small>*Selecciona un año para ver o crear nuevas secciones</small>
+            <!-- <pre>Valor</pre>
+            <p>{{seccionForm.value|json}}</p>
+            <pre>valid</pre>
+            <p>{{seccionForm.valid}}</p> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn primary-btn">Guardar</button>
+          <button type="submit" class="btn primary-btn">Guardar</button>
         </div>
       </div>
     </div>
+  </form>
   </div>
 
   <!-- MODAL UNIR SECCIONES  -->
   <div class="modal fade" id="UnirModal" tabindex="-1" aria-labelledby="UnirModalLabel" aria-hidden="true">
+    <form [formGroup]="unirSeccion" (ngSubmit)="unirSecciones()">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -196,39 +155,44 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          
+            
+
+          <div class="input-style-1">
+            <label>Nombre</label>
+            <input type="text" placeholder="nombre" formControlName="nombre" style="text-transform: uppercase;"/>
+            <small class="text-danger" *ngIf="nombreValido('nombre')">campo requerido o no válido</small>
+        </div>
             <div class="select-style-1">
-
                 <div class="select-position">
-                    <select>
+                    <select formControlName="seccion1">
                         <option value="">Selecciona una Sección</option>
-                        <option value="">A</option>
-                        <option value="">B</option>
-                    
-
+                        <option *ngFor="let seccion of listaSecciones;  let i = index;" [value]="seccion.out_cod_seccion">{{seccion.out_nombre}}</option>
                     </select>
                 </div>
             </div>
       
 
             <div class="select-style-1">
-
                 <div class="select-position">
-                    <select>
+                    <select formControlName="seccion2">
                         <option value="">Selecciona una Sección</option>
-                        <option value="">A</option>
-                        <option value="">B</option>
-                    
-
+                        <option *ngFor="let seccion of listaSecciones; let i = index;" [value]="seccion.out_cod_seccion">{{seccion.out_nombre}}</option>
                     </select>
+                    <small class="text-danger" *ngIf="validarSecciones()">Debe seleccionar secciones diferentes</small>
                 </div>
             </div>
       
         </div>
+ <!-- <pre>Valor</pre> -->
+            <!-- <p>{{unirSeccion.value|json}}</p>
+            <pre>valid</pre>
+            <p>{{unirSeccion.valid}}</p> -->
+
         <div class="modal-footer">
           <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn primary-btn">Guardar</button>
+          <button type="submit" class="btn primary-btn" [disabled]="accion">Guardar</button>
         </div>
       </div>
     </div>
+  </form>
   </div>
