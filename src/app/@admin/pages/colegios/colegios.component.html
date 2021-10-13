@@ -6,7 +6,8 @@
                     <a href="#0" class="main-btn active-btn rounded-md btn-hover" 
                                  data-bs-toggle="modal" 
                                  data-bs-target="#exampleModal"
-                                 data-bs-whatever="@mdo"><i class="mdi mdi-plus"></i>Nuevo Colegio</a>
+                                 data-bs-whatever="@mdo"
+                                 (click)="resetForm()"><i class="mdi mdi-plus"></i>Nuevo Colegio</a>
                 </div>
                 <div class="right">
                     <div class="input-style-1">
@@ -29,111 +30,32 @@
                     <!-- end table row-->
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let colegio of listaColegios; let i = index;">
                       <td>
                         <div class="min-width">
-                        <p>1</p>
+                        <p>{{i+1}}</p>
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>ABELARDO R. FORTIN</p>
+                        <p>{{colegio.out_nombre}}</p>
                       </td>
                       <td class="min-width">
-                        <p><a href="#0">Activo</a></p>
+                        <p *ngIf="colegio.out_estado==true"><a href="#0">ACTIVO</a></p>
+                        <p *ngIf="colegio.out_estado==false"><a href="#0">INACTIVO</a></p>
                       </td>
 
                       <td class="min-width">
                         <span class="status-btn primary-btn mr-5 pointer"
                               data-bs-toggle="modal" 
-                              data-bs-target="#exampleModal"><i class="mdi mdi-pencil-outline"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
+                              data-bs-target="#editarModal"
+                              (click)="cargarDatosColegio(i)"><i class="mdi mdi-pencil-outline"></i></span>
+                     
                       </td>
                     
                     </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>2</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>TECNICO LUIS BOGRAN</p>
-                      </td>
-                      <td class="min-width">
-                        <p><a href="#0">Activo</a></p>
-                      </td>
-
-                      <td class="min-width">
-                        <span class="status-btn primary-btn mr-5 pointer"
-                              data-bs-toggle="modal" 
-                              data-bs-target="#exampleModal"><i class="mdi mdi-pencil-outline"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>3</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>  TECNICO HONDURAS</p>
-                      </td>
-                      <td class="min-width">
-                        <p><a href="#0">Activo</a></p>
-                      </td>
-
-                      <td class="min-width">
-                        <span class="status-btn primary-btn mr-5 pointer"
-                              data-bs-toggle="modal" 
-                              data-bs-target="#exampleModal"><i class="mdi mdi-pencil-outline"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>4</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>  HUMBERTO LOPEZ Y LOPEZ</p>
-                      </td>
-                      <td class="min-width">
-                        <p><a href="#0">Activo</a></p>
-                      </td>
-
-                      <td class="min-width">
-                        <span class="status-btn primary-btn mr-5 pointer"
-                              data-bs-toggle="modal" 
-                              data-bs-target="#exampleModal"><i class="mdi mdi-pencil-outline"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>5</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>SAN PABLO I I</p>
-                      </td>
-                      <td class="min-width">
-                        <p><a href="#0">Activo</a></p>
-                      </td>
-
-                      <td class="min-width">
-                        <span class="status-btn primary-btn mr-5 pointer"
-                              data-bs-toggle="modal" 
-                              data-bs-target="#exampleModal"><i class="mdi mdi-pencil-outline"></i></span>
-                        <span class="status-btn danger-btn pointer"><i class="mdi mdi-delete"></i></span>
-                      </td>
-                    
-                    </tr>
+                  
+                   
+                 
                   
                     <!-- end table row -->
 
@@ -146,8 +68,8 @@
   
               <div class="row">
                   <div class="col">
-                      <a href="#0" class="main-btn light-btn rounded-md btn-hover mr-5">Anterior</a>
-                      <a href="#0" class="main-btn light-btn rounded-md btn-hover">Siguiente</a>
+                      <a type="button" class="main-btn light-btn rounded-md btn-hover mr-5" (click)="cambiarPagina(-10)">Anterior</a>
+                      <a type="button" class="main-btn light-btn rounded-md btn-hover" (click)="cambiarPagina(10)">Siguiente</a>
                   </div>
               </div>
 
@@ -157,43 +79,82 @@
 
 
 <!-- MODAL EDICION DE NOMBRE Y DESCRIPCION -->
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
+    <form [formGroup]="colegioForm" (ngSubmit)="nuevoColegio()"> 
+  <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Colegio</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+    
             <div class="input-style-1">
                 <label>Nombre</label>
-                <input type="text" placeholder="Nombre" />
+                <input type="text" placeholder="Nombre" formControlName="nombre" />
+                <small class="text-danger" *ngIf="campoNoValido('nombre')">Campo requerido o no válido</small>
+            </div>
+        
+            <div class="select-style-1">
+
+                <div class="select-position">
+                    <select formControlName="estado">
+                        <option value="">Selecciona un estado</option>
+                        <option [value]="true">ACTIVO</option>
+                        <option [value]="false">INACTIVO</option>
+                    
+                    </select>
+                    <small class="text-danger" *ngIf="campoNoValido('estado')">Campo requerido o no válido</small>
+                </div>
+            </div>
+     
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn primary-btn">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+
+  <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarModalLabel">Colegio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="colegioForm" (ngSubmit)="actualizarColegio()">
+
+            <div class="input-style-1">
+                <label>Nombre</label>
+                <input type="text" placeholder="Nombre" formControlName="nombre" />
             </div>
           
 
             <div class="select-style-1">
 
                 <div class="select-position">
-                    <select>
+                    <select formControlName="estado">
                         <option value="">Selecciona un estado</option>
-                        <option value="">Activo</option>
-                        <option value="">Inactivo</option>
-                    
-
+                        <option [value]="true">ACTIVO</option>
+                        <option [value]="false">INACTIVO</option>
+                  
                     </select>
                 </div>
             </div>
-          </form>
-        </div>
+     
         <div class="modal-footer">
           <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn primary-btn">Guardar</button>
+          <button type="submit" class="btn primary-btn">Guardar</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
-
   
   
   
