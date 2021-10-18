@@ -38,6 +38,9 @@ actualizarColegio(formData){
   return this.http.patch(`${this.url}/colegios/actualizar-colegio`,formData,this.headers)
 }
 
+buscarColegio(termino){
+  return this.http.get(`${this.url}/colegios/busqueda/${termino}`)
+}
 
 
 }

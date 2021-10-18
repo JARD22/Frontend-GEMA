@@ -16,6 +16,7 @@ export class ColegiosComponent implements OnInit {
   desde:number=0;
   formEnviado=false;
   colegioForm:FormGroup;
+  colegiosAnteriores:any[]=[]
 
 
   constructor(private colegioService:ColegiosService,
@@ -26,7 +27,7 @@ export class ColegiosComponent implements OnInit {
     this.cargarColegios();
 
     this.colegioForm= this.fb.group({
-      nombre:['',[Validators.required,Validators.minLength(5),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+      nombre:['',[Validators.required,Validators.minLength(5),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{2,25}$")]],
       estado:['',[Validators.required]],
     });
     
@@ -36,6 +37,7 @@ export class ColegiosComponent implements OnInit {
   cargarColegios(){
     this.colegioService.listaColegios().subscribe((resp:any)=>{
       this.listaColegios= resp.colegios
+      this.colegiosAnteriores = [...this.listaColegios];
     });
   }
 
@@ -103,4 +105,19 @@ export class ColegiosComponent implements OnInit {
     }
 
   }  
+
+  buscarColegio(e){
+    
+
+  
+
+    if(e.length>0){
+      this.colegioService.buscarColegio(e).subscribe((resp:any)=>{
+       this.listaColegios= resp.colegios
+      },(error:any)=>{Swal.fire('Error',error.error.msg,'error')})
+    }else{
+      this.listaColegios= [...this.colegiosAnteriores]
+    return 
+  }
+  }
 }
