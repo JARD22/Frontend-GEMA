@@ -108,9 +108,6 @@ export class ColegiosComponent implements OnInit {
 
   buscarColegio(e){
     
-
-  
-
     if(e.length>0){
       this.colegioService.buscarColegio(e).subscribe((resp:any)=>{
        this.listaColegios= resp.colegios

@@ -1,138 +1,215 @@
 <!-- DATOS DE MATRICULA -->
 
 <div class="row">
+  
+  
+
+
+
 
   <div class="col-lg-12">
+    <form [formGroup]="matriculaForm">
     <div class="card-style mb-30 shadow-sm p-3 mb-5 bg-body rounded">
       <h6 class="mb-25">Datos de la matricula</h6>
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="input-style-2">
-            <label>Año de matricula</label>
-            <input type="date" />
-            <span class="icon"><i class="lni lni-chevron-down"></i></span>
-          </div>
 
+      <div class="row">
+
+        <div class="col-lg-5">
+
+          <div class="select-style-1">
+            <label>Año de Matricula:</label>
+            <div class="select-position">
+              <select formControlName="anio">
+                <option value="">Selecciona una opción</option>
+                <option *ngFor="let anio of AniosMatricula" [value]="anio">{{anio}}</option>
+      
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
           <div class="select-style-1">
             <label>Sede:</label>
             <div class="select-position">
-              <select>
+              <select formControlName="sede">
                 <option value="">Selecciona una opción</option>
-                <option value="">JZL</option>
-                <option value="">San Jose del pedregal</option>
-
-              </select>
-            </div>
-          </div>
-
-
-        </div>
-
-        <div class="col-lg-3">
-          <div class="select-style-1">
-            <label>Tipo Matricula:</label>
-            <div class="select-position">
-              <select>
-                <option value="">Selecciona una opción</option>
-                <option value="">Jardín</option>
-                <option value="">Escuela</option>
-                <option value="">Colegio</option>
-
+                <option value="">JACINTO ZELAYA LOZANO</option>
+                <option value="">SAN JOSÉ DEL PEDREGAL</option>
               </select>
             </div>
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="select-style-1">
-            <label>Curso:</label>
-            <div class="select-position">
-              <select>
-                <option value="">Selecciona una opción</option>
-                <option value="">Septimo</option>
-                <option value="">Octavo</option>
-                <option value="">Noveno</option>
-                <option value="">Bachillerato Técnico en Contaduría y Finanzas</option>
+        <div class="col-lg-2"></div>
 
-              </select>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="select-style-1">
+              <label>Tipo Matricula:</label>
+              <div class="select-position">
+                <select formControlName="cod_tipo_matricula">
+                  <option value="">Selecciona una opción</option>
+                  <option *ngFor="let tipo of tiposMatricula"  [value]="tipo.out_cod_tipo">{{tipo.out_nombre}}</option>
+                </select>
+              </div>
             </div>
           </div>
+          <div class="col-lg-6">
+            <div class="select-style-1">
+              <label>Curso/Grado:</label>
+              <div class="select-position">
+                <select formControlName="curso">
+                  <option value="">Selecciona una opción</option>
+                  <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
+  
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="select-style-1">
+              <label>Sección:</label>
+              <div class="select-position">
+                <select formControlName="seccion">
+                  <option value="">Selecciona una opción</option>
+                  <option value="">A</option>
+                  <option value="">B</option>
+                  <option value="">C</option>
+  
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <div class="select-style-1">
-            <label>Sección:</label>
-            <div class="select-position">
-              <select>
-                <option value="">Selecciona una opción</option>
-                <option value="">A</option>
-                <option value="">B</option>
-                <option value="">C</option>
+     
 
-              </select>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="input-style-1">
+              <label>Identidad Alumno</label>
+              <input type="text" placeholder="Identidad Alumno" formControlName="id_alumno" max="13"/>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-style-1">
+              <label>Nombre Alumno</label>
+              <input type="text" placeholder="Nombre Alumno" disabled="true"  />
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-style-1">
+              <label>Identidad Encargado</label>
+              <input type="text" placeholder="Identidad Encargado" formControlName="id_encargado" max="13"/>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-style-1">
+              <label>Nombre Encargado</label>
+              <input type="text" placeholder="Nombre encargado"  disabled="true"/>
             </div>
           </div>
         </div>
 
         <hr class="divider">
-
-
         <div class="row">
-          <div class="col-lg-4">
-            <div class="input-style-1">
-              <label>Identidad Alumno</label>
-              <input type="text" placeholder="Identidad Alumno" />
-            </div>
+          <h5 class="mb-3">Datos Adicionales</h5>
+          
+          <div class="col-lg-6">
+            <div class="form-check checkbox-style mb-20 mt-2">
+              <input class="form-check-input" 
+                     type="checkbox"
+                     value="" id="checkbox-1"
+                     formControlName="doc_pendiente"
+                      />
+              <label class="form-check-label" for="checkbox-1">
+                  Documentación Pendiente</label>
           </div>
-          <div class="col-lg-4">
-            <div class="input-style-1">
-              <label>Identidad Encargado</label>
-              <input type="text" placeholder="Identidad Encargado" />
-            </div>
+              <div class="input-style-3">
+                
+              <textarea placeholder="Descripción" rows="5" formControlName="desc_doc"></textarea>
+              <span class="icon"><i class="lni lni-text-format"></i></span>              
+          </div> 
           </div>
-          <div class="col-lg-4">
-            <!-- <div class="input-style-1">
-              <label>Cupos</label>
-              <input type="text" placeholder="Cupos" />
-            </div> -->
+          <div class="col-lg-6">
+            <div class="form-check checkbox-style mb-20 mt-2">
+              <input class="form-check-input" 
+                     type="checkbox"
+                     value="" id="checkbox-2"
+                     formControlName="doc_pendiente"
+                      />
+              <label class="form-check-label" for="checkbox-2">
+                  Condicionado</label>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="input-style-1">
-              <input type="text" placeholder="Nombre Alumno" disabled="true" />
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="input-style-1">
-              <input type="text" placeholder="Nombre encargado"  disabled="true"/>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <!-- <div class="input-style-1">
-              <label>Cupos</label>
-              <input type="text" placeholder="Cupos" />
-            </div> -->
+              <div class="input-style-3">
+                
+              <textarea placeholder="Motivo" rows="5" ></textarea>
+              <span class="icon"><i class="lni lni-text-format"></i></span>
+              
+              
+          </div> 
           </div>
         </div>
 
+        <hr >
         <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-8">
-            <div class="alert-box warning-alert pl-100">
+          <h5 class="mb-3">Materia Retrasada</h5>
+        <div class="col-lg-6">
+          <div class="input-style-1">
+            <label>Nombre Clase</label>
+            <input type="text" placeholder="Nombre Clase"/>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="select-style-1">
+            <label>Curso/Grado:</label>
+            <div class="select-position">
+              <select formControlName="curso">
+                <option value="">Selecciona una opción</option>
+                <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        </div>
 
-              <div class="alert">
-                <h4 class="alert-heading text-gray">Aviso</h4>
-                <p class="text-medium text-gray">
-                  Este alumno ya se encuentra registrado, para una nueva matricula solo rellena los datos
-                  correspondientes en este apartado
-                </p>
+        <div class="row">
+          <h5 class="mb-3">Estudios Realizados</h5>
+          <div class="col-lg-3">
+            <div class="input-style-1">
+              <label>Colegio</label>
+              <input type="text" placeholder="Colegio"/>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="select-style-1">
+              <label>Curso/Grado:</label>
+              <div class="select-position">
+                <select formControlName="curso">
+                  <option value="">Selecciona una opción</option>
+                  <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
+                </select>
               </div>
             </div>
           </div>
-          <div class="col-lg-2"></div>
+          <div class="col-lg-2">
+            <div class="input-style-1">
+              <label>fecha</label>
+              <input type="date" placeholder="fecha"/>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="input-style-1">
+              <label>Lugar</label>
+              <input type="text" placeholder="Lugar"/>
+            </div>
+          </div>
         </div>
 
         <div class="row ">
           <div class="col-lg-12 ">
-            <a href="#0" 
+            <a type="submit"
               class="main-btn active-btn rounded-md btn-hover float-end" 
                 >Guardar </a>
           </div>
@@ -141,6 +218,7 @@
       </div>
 
     </div>
+  </form>
   </div>
 </div>
 
