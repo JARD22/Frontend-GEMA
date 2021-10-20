@@ -5,6 +5,9 @@ import { NuevaMatriculaRoutingModule } from './nueva-matricula-routing.module';
 import { NuevaMatriculaComponent } from './nueva-matricula.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+PdfMakeWrapper.setFonts(pdfFonts);
 
 
 @NgModule({

@@ -82,9 +82,7 @@
           </div>
         </div>
 
-     
-
-
+  
         <div class="row">
           <div class="col-lg-3">
             <div class="input-style-1">
@@ -154,14 +152,22 @@
 
         <hr >
         <div class="row">
-          <h5 class="mb-3">Materia Retrasada</h5>
-        <div class="col-lg-6">
+          <div class="form-check checkbox-style mb-20 mt-2">
+            <input class="form-check-input" 
+                   type="checkbox"
+                   value="" id="checkbox-3"
+                   (click)="mostrarCampos('retrasada')"
+                    />
+            <label class="form-check-label" for="checkbox-3">
+                Materia Retrasada</label>
+        </div>
+        <div class="col-lg-6" *ngIf="retrasada">
           <div class="input-style-1">
             <label>Nombre Clase</label>
             <input type="text" placeholder="Nombre Clase"/>
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" *ngIf="retrasada">
           <div class="select-style-1">
             <label>Curso/Grado:</label>
             <div class="select-position">
@@ -175,14 +181,22 @@
         </div>
 
         <div class="row">
-          <h5 class="mb-3">Estudios Realizados</h5>
-          <div class="col-lg-3">
-            <div class="input-style-1">
+          <div class="form-check checkbox-style mb-20 mt-2">
+            <input class="form-check-input" 
+                   type="checkbox"
+                   (click)="mostrarCampos('estudios')"
+                   value="" id="checkbox-4"
+                    />
+            <label class="form-check-label" for="checkbox-4">
+                Estudios Realizados</label>
+        </div>
+          <div class="col-lg-4">
+            <div class="input-style-1" *ngIf="estudios">
               <label>Colegio</label>
               <input type="text" placeholder="Colegio"/>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-5" *ngIf="estudios">
             <div class="select-style-1">
               <label>Curso/Grado:</label>
               <div class="select-position">
@@ -193,22 +207,22 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-3" *ngIf="estudios">
             <div class="input-style-1">
               <label>fecha</label>
               <input type="date" placeholder="fecha"/>
             </div>
           </div>
-          <div class="col-lg-3">
-            <div class="input-style-1">
-              <label>Lugar</label>
-              <input type="text" placeholder="Lugar"/>
-            </div>
-          </div>
+      
         </div>
 
         <div class="row ">
-          <div class="col-lg-12 ">
+          <div class="col-lg-6">
+            <a type="button" class="main-btn danger-btn rounded-md btn-hover" (click)="generarPDF()"><i 
+              class="mdi mdi-download"></i>Imprimir PDF</a>
+            
+          </div>
+          <div class="col-lg-6">
             <a type="submit"
               class="main-btn active-btn rounded-md btn-hover float-end" 
                 >Guardar </a>
