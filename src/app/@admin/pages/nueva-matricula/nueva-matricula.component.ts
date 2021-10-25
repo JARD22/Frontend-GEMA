@@ -24,7 +24,7 @@ export class NuevaMatriculaComponent implements OnInit {
   cod_curso;
   estudios= false;
   retrasada = false;
-
+  fechaActual = `${new Date().getMonth()+1}-${new Date().getDate()}-${new Date().getFullYear()}`
 
   constructor(private matriculaService:MatriculaService,
               private cursosService:CursosSeccionesService,
@@ -32,7 +32,9 @@ export class NuevaMatriculaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.matriculaForm=this.fb.group({
+
+
+      this.matriculaForm=this.fb.group({
       cod_tipo_matricula:['',[Validators.required]],
       anio:['',[Validators.required]],
       curso:[''],
@@ -93,7 +95,30 @@ export class NuevaMatriculaComponent implements OnInit {
       [' ',new Cell(new Txt('CENTRO EDUCATIVO NO GUBERNAMENTAL ALFONSO GUILLEN ZELAYA').alignment('center').bold().end).end, ' '],
       ['',new Cell(new Txt('FICHA DE MATRICULA').alignment('center').end).end, ' ']
     ]).widths([40,'*',10]).layout('noBorders').end);
+        
+    pdf.add(new Table([
+      [new Cell(new Txt('AÑO DE MATRICULA: ').alignment('right').bold().end).end,new Cell(new Txt(this.anio).alignment('left').end).end,new Cell(new Txt('FECHA DE MATRICULA: ').alignment('right').bold().end).end,new Cell(new Txt(this.fechaActual).alignment('left').end).end]
+    ]).widths([ 200,50,140,70]).layout('noBorders').end);
 
+    pdf.add(new Table([
+      [' ',' ',' ',' ',' '],
+      [new Cell(new Txt('DATOS DEL ESTUDIANTE').alignment('center').bold().end).colSpan(5).fillColor('gray').end,' ',' ',' ',' '],
+      [new Cell(new Txt('No. Identidad').alignment('left').bold().end).end,new Cell(new Txt('0801199619360').alignment('left').bold().end).end,' ',' ',' '],
+      [new Cell(new Txt('Nombre').alignment('left').bold().end).end,new Cell(new Txt('JORGE RAUL AGUILERA DURON').alignment('left').bold().end).end, new Cell(new Txt('FOTO').alignment('right').bold().end).end,' ',' '],
+      [new Cell(new Txt('Fecha de nacimiento').alignment('left').bold().end).end,new Cell(new Txt('19/08/1996').alignment('left').end).end,' ',' ',' '],
+      [new Cell(new Txt('Edad').alignment('left').bold().end).end,new Cell(new Txt('25').alignment('left').end).end,' ',' ',' '],
+      [new Cell(new Txt('Sexo').alignment('left').bold().end).end,new Cell(new Txt('M').alignment('left').end).end,' ',' ',' '],
+      [new Cell(new Txt('Nacionalidad').alignment('left').bold().end).end,new Cell(new Txt('HONDUREÑA').alignment('left').end).end,' ',' ',' '],
+      [new Cell(new Txt('Dirección').alignment('left').bold().end).end,new Cell(new Txt('Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus voluptas eaque commodi, nihil et minus reprehenderit perspiciatis provident aperiam optio a numquam dolore nesciunt necessitatibus quae, eveniet inventore incidunt! Voluptatibus!').alignment('justify').end).colSpan(4).end,' ',' ',' ']
+    ]).widths([150,200,'*','*',10]).layout('noBorders').end)
+
+    pdf.add(new Table([
+      [' ',' ',' ',' '],
+      [new Cell(new Txt('DATOS FAMILIARES').alignment('center').bold().end).colSpan(4).fillColor('gray').end,' ',' ',' '],
+      [' ',' ',' ',' '],
+      [' ',' ',' ',' ']
+      
+    ]).widths(['*','*','*','*']).end)
 
 
     pdf.create().open();
