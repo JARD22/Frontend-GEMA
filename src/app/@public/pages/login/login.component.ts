@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { UsuarioService } from '../../../@admin/services/usuario.service';
 
 
@@ -30,7 +31,7 @@ this.usuarioService.login(this.loginForm.value).subscribe((resp:any)=>{
     localStorage.removeItem('correo')
   }
   this.router.navigateByUrl('admin')
-})
+},(error:any)=>{Swal.fire('Error',error.error.msg,'error')})
 }  
   
 

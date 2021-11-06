@@ -34,4 +34,15 @@ export class MatriculaService {
     return this.http.get(`${this.url}/matricula/cursos`)
   }
 
+  datosAlumno(dni){
+    return this.http.get(`${this.url}/matricula/datos-alumno/${dni}`,this.headers)
+  }
+
+  datosParentesco(dni){
+    return this.http.get(`${this.url}/matricula/datos-parentesco/${dni}`,this.headers)
+  }
+
+  nuevaMatricula(formData:any){
+   return this.http.post(`${this.url}/matricula/nueva-matricula`,formData,this.headers)
+  }
 }

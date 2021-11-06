@@ -373,7 +373,6 @@ validarRetiro(){
 let valor = this.alumnoForm.get('estado').value 
 
 if (valor==true) {
-  console.log('es verdadero')
   this.retiro=false
   this.alumnoForm.get('motivo_retiro').clearValidators();
   this.alumnoForm.get('motivo_retiro').updateValueAndValidity();

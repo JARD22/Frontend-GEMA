@@ -2,13 +2,8 @@
 
 <div class="row">
   
-  
-
-
-
-
   <div class="col-lg-12">
-    <form [formGroup]="matriculaForm">
+    <form [formGroup]="matriculaForm" (ngSubmit)="nuevaMatricula()">
     <div class="card-style mb-30 shadow-sm p-3 mb-5 bg-body rounded">
       <h6 class="mb-25">Datos de la matricula</h6>
 
@@ -22,8 +17,8 @@
               <select formControlName="anio">
                 <option value="">Selecciona una opción</option>
                 <option *ngFor="let anio of AniosMatricula" [value]="anio">{{anio}}</option>
-      
               </select>
+              <small *ngIf="campoNoValido('anio')" class="text-danger">Campo requerido o no válido</small>
             </div>
           </div>
         </div>
@@ -31,11 +26,12 @@
           <div class="select-style-1">
             <label>Sede:</label>
             <div class="select-position">
-              <select formControlName="sede">
+              <select formControlName="sede" id="sede" (change)="asignarSede()">
                 <option value="">Selecciona una opción</option>
-                <option value="">JACINTO ZELAYA LOZANO</option>
-                <option value="">SAN JOSÉ DEL PEDREGAL</option>
+                <option *ngFor="let sede of sedes" [value]="sede.id">{{sede.nombre}}</option>
+                
               </select>
+              <small *ngIf="campoNoValido('sede')" class="text-danger">Campo requerido o no válido</small>
             </div>
           </div>
         </div>
@@ -51,6 +47,7 @@
                   <option value="">Selecciona una opción</option>
                   <option *ngFor="let tipo of tiposMatricula"  [value]="tipo.out_cod_tipo">{{tipo.out_nombre}}</option>
                 </select>
+                <small *ngIf="campoNoValido('cod_tipo_matricula')" class="text-danger">Campo requerido o no válido</small>
               </div>
             </div>
           </div>
@@ -60,9 +57,9 @@
               <div class="select-position">
                 <select formControlName="curso">
                   <option value="">Selecciona una opción</option>
-                  <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
-  
+                  <option *ngFor="let curso of cursos; let i = index" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
                 </select>
+                <small *ngIf="campoNoValido('curso')" class="text-danger">Campo requerido o no válido</small>
               </div>
             </div>
           </div>
@@ -70,13 +67,11 @@
             <div class="select-style-1">
               <label>Sección:</label>
               <div class="select-position">
-                <select formControlName="seccion">
+                <select formControlName="seccion" (change)="asignarSeccion()">
                   <option value="">Selecciona una opción</option>
-                  <option value="">A</option>
-                  <option value="">B</option>
-                  <option value="">C</option>
-  
+                  <option *ngFor="let seccion of secciones" [value]="seccion.out_cod_seccion">{{seccion.out_nombre}}</option>
                 </select>
+                <small *ngIf="campoNoValido('seccion')" class="text-danger">Campo requerido o no válido</small>
               </div>
             </div>
           </div>
@@ -87,25 +82,32 @@
           <div class="col-lg-3">
             <div class="input-style-1">
               <label>Identidad Alumno</label>
-              <input type="text" placeholder="Identidad Alumno" formControlName="id_alumno" max="13"/>
+              <input type="text" placeholder="Identidad Alumno" formControlName="id_alumno" max="13" (keyup)="asignarDatosAlumno($event.target.value)"/>
+              <small *ngIf="error_dni_alumno" class="text-danger">{{error_dni_alumno_msg}}</small>
+              <small *ngIf="campoNoValido('id_alumno')" class="text-danger">Campo requerido o no válido</small>
             </div>
           </div>
           <div class="col-lg-3">
             <div class="input-style-1">
               <label>Nombre Alumno</label>
-              <input type="text" placeholder="Nombre Alumno" disabled="true"  />
+              <input type="text" placeholder="Nombre Alumno"  formControlName="nombre_alumno"/>
             </div>
           </div>
           <div class="col-lg-3">
             <div class="input-style-1">
               <label>Identidad Encargado</label>
-              <input type="text" placeholder="Identidad Encargado" formControlName="id_encargado" max="13"/>
-            </div>
+              <input type="text" placeholder="Identidad Encargado"
+                 formControlName="id_encargado"  
+                (keyup)="asginarEncargado($event.target.value)"
+                max="13"/>
+                <small *ngIf="error_dni_encargado" class="text-danger">DNI ingresado no corresponde a una persona del grupo familiar</small>
+                <small *ngIf="campoNoValido('id_encargado')" class="text-danger">Campo requerido o no válido</small>
+              </div>
           </div>
           <div class="col-lg-3">
             <div class="input-style-1">
               <label>Nombre Encargado</label>
-              <input type="text" placeholder="Nombre encargado"  disabled="true"/>
+              <input type="text" placeholder="Nombre encargado" formControlName="nombre_encargado"/>
             </div>
           </div>
         </div>
@@ -127,7 +129,8 @@
               <div class="input-style-3">
                 
               <textarea placeholder="Descripción" rows="5" formControlName="desc_doc"></textarea>
-              <span class="icon"><i class="lni lni-text-format"></i></span>              
+              <span class="icon"><i class="lni lni-text-format"></i></span>     
+              <small *ngIf="campoNoValido('desc_doc')" class="text-danger">Campo requerido o no válido</small>         
           </div> 
           </div>
           <div class="col-lg-6">
@@ -135,28 +138,60 @@
               <input class="form-check-input" 
                      type="checkbox"
                      value="" id="checkbox-2"
-                     formControlName="doc_pendiente"
+                     formControlName="condicionado"
                       />
-              <label class="form-check-label" for="checkbox-2">
+              <label class="form-check-label" for="checkbox-2" >
                   Condicionado</label>
           </div>
               <div class="input-style-3">
                 
-              <textarea placeholder="Motivo" rows="5" ></textarea>
+              <textarea placeholder="Motivo" rows="5" formControlName="motivo"></textarea>
               <span class="icon"><i class="lni lni-text-format"></i></span>
-              
-              
+              <small *ngIf="campoNoValido('motivo')" class="text-danger">Campo requerido o no válido</small>
           </div> 
           </div>
         </div>
 
         <hr >
+
+        
+        <div class="row">
+          <h5 class="mb-3">Estudios Realizados</h5>
+          <div class="col-lg-4">
+            <div class="input-style-1" >
+              <label>Colegio</label>
+              <input type="text" placeholder="Colegio" formControlName="colegio_procedencia"/>
+              <small *ngIf="campoNoValido('colegio_procedencia')" class="text-danger">Campo requerido o no válido</small>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="select-style-1">
+              <label>Curso/Grado:</label>
+              <div class="select-position">
+                <select formControlName="curso_procedencia">
+                  <option value="">Selecciona una opción</option>
+                  <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
+                </select>
+                <small *ngIf="campoNoValido('curso_procedencia')" class="text-danger">Campo requerido o no válido</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3" >
+            <div class="input-style-1">
+              <label>fecha</label>
+              <input type="date" placeholder="fecha" formControlName="fecha_procedencia"/>
+              <small *ngIf="campoNoValido('fecha_procedencia')" class="text-danger">Campo requerido o no válido</small>
+            </div>
+          </div>
+      
+        </div>
         <div class="row">
           <div class="form-check checkbox-style mb-20 mt-2">
             <input class="form-check-input" 
                    type="checkbox"
                    value="" id="checkbox-3"
-                   (click)="mostrarCampos('retrasada')"
+                   formControlName="materia_retrasada_chk"
+                   
                     />
             <label class="form-check-label" for="checkbox-3">
                 Materia Retrasada</label>
@@ -164,73 +199,46 @@
         <div class="col-lg-6" *ngIf="retrasada">
           <div class="input-style-1">
             <label>Nombre Clase</label>
-            <input type="text" placeholder="Nombre Clase"/>
+            <input type="text" placeholder="Nombre Clase" formControlName="materia_retrasada"/>
+            <small *ngIf="campoNoValido('materia_retrasada')" class="text-danger">Campo requerido o no válido</small>
           </div>
         </div>
         <div class="col-lg-6" *ngIf="retrasada">
           <div class="select-style-1">
             <label>Curso/Grado:</label>
             <div class="select-position">
-              <select formControlName="curso">
+              <select formControlName="curso_retrasada">
                 <option value="">Selecciona una opción</option>
                 <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
               </select>
+              <small *ngIf="campoNoValido('curso_retrasada')" class="text-danger">Campo requerido o no válido</small>
             </div>
           </div>
         </div>
         </div>
 
-        <div class="row">
-          <div class="form-check checkbox-style mb-20 mt-2">
-            <input class="form-check-input" 
-                   type="checkbox"
-                   (click)="mostrarCampos('estudios')"
-                   value="" id="checkbox-4"
-                    />
-            <label class="form-check-label" for="checkbox-4">
-                Estudios Realizados</label>
-        </div>
-          <div class="col-lg-4">
-            <div class="input-style-1" *ngIf="estudios">
-              <label>Colegio</label>
-              <input type="text" placeholder="Colegio"/>
-            </div>
-          </div>
-          <div class="col-lg-5" *ngIf="estudios">
-            <div class="select-style-1">
-              <label>Curso/Grado:</label>
-              <div class="select-position">
-                <select formControlName="curso">
-                  <option value="">Selecciona una opción</option>
-                  <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3" *ngIf="estudios">
-            <div class="input-style-1">
-              <label>fecha</label>
-              <input type="date" placeholder="fecha"/>
-            </div>
-          </div>
-      
-        </div>
 
         <div class="row ">
           <div class="col-lg-6">
-            <a type="button" class="main-btn danger-btn rounded-md btn-hover" (click)="generarPDF()"><i 
-              class="mdi mdi-download"></i>Imprimir PDF</a>
+            <button type="button" class="main-btn danger-btn rounded-md btn-hover" [disabled]="!matriculaForm.valid" (click)="generarPDF()"><i 
+              class="mdi mdi-download"></i>Ficha de Matricula</button>
             
           </div>
           <div class="col-lg-6">
-            <a type="submit"
+            <button type="submit"
               class="main-btn active-btn rounded-md btn-hover float-end" 
-                >Guardar </a>
+                >Guardar </button>
           </div>
+
+          <span>VALIDO</span>
+          <pre>{{matriculaForm.valid}}</pre>
+          <hr>
+          <span>VALOR</span>
+          <pre>{{matriculaForm.value| json}}</pre>
         </div>
 
       </div>
-
+  
     </div>
   </form>
   </div>

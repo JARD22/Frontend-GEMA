@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ColegiosService } from '../../services/colegios.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { INT_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-colegios',
@@ -27,7 +28,7 @@ export class ColegiosComponent implements OnInit {
     this.cargarColegios();
 
     this.colegioForm= this.fb.group({
-      nombre:['',[Validators.required,Validators.minLength(5),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{2,25}$")]],
+      nombre:['',[Validators.required,Validators.minLength(5),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{2,50}$")]],
       estado:['',[Validators.required]],
     });
     
@@ -107,7 +108,7 @@ export class ColegiosComponent implements OnInit {
   }  
 
   buscarColegio(e){
-    
+
     if(e.length>0){
       this.colegioService.buscarColegio(e).subscribe((resp:any)=>{
        this.listaColegios= resp.colegios
@@ -118,3 +119,4 @@ export class ColegiosComponent implements OnInit {
   }
   }
 }
+
