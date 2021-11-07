@@ -61,7 +61,7 @@ export class NuevaPersonaComponent implements OnInit {
                 segundo_nombre:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
                 segundo_apellido:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
                 encargado:[false],
-                ocupacion:['',Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}$")],
+                ocupacion:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}$")]],
                 lugar_trabajo:['',[Validators.required,Validators.minLength(4),Validators.pattern('^[ A-Z a-z 0-9 . _ % + - , ; # ÁÉÍÓÚáéíóúÑñ()]{2,250}$')]],
                 escolaridad:['',[Validators.required,Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
                 nacionalidad:['',[Validators.required,Validators.minLength(6),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
@@ -84,8 +84,8 @@ export class NuevaPersonaComponent implements OnInit {
   dni:['',[Validators.required,Validators.minLength(13)]],
   primer_nombre:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
   primer_apellido:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-  segundo_nombre:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
-  segundo_apellido:['',[Validators.required,Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+  segundo_nombre:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+  segundo_apellido:['',[Validators.minLength(3),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
   nacionalidad:['',[Validators.required,Validators.minLength(6),Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
   sexo:['',[Validators.required,Validators.minLength(1)]],
   fecha_nacimiento:['',[Validators.required]],
@@ -225,6 +225,8 @@ enviarFormulario(){
             icon: 'success',
             text: resp.msg
           });
+          this.usuarioForm.reset();
+          this.formEnviado=false
         },(error:any)=>{
           Swal.fire({
             title: 'Error',
@@ -242,6 +244,8 @@ enviarFormulario(){
           icon: 'success',
           text: resp.msg
         });
+        this.alumnoForm.reset()
+        this.formEnviado=false
       },(error:any)=>{
         Swal.fire({
           title: 'Error',
@@ -259,6 +263,8 @@ enviarFormulario(){
             icon: 'success',
             text: resp.msg
           });
+          this.familiarForm.reset();
+          this.formEnviado=false
         },(error:any)=>{
           Swal.fire({
             title: 'Error',

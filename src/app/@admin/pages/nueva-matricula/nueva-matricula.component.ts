@@ -73,8 +73,8 @@ export class NuevaMatriculaComponent implements OnInit {
       motivo:[{disabled:true,value:''}],
       materia_retrasada_chk:[false],
       materia_retrasada:[''],
-      curso_retrasada:[''],
-      colegio_procedencia:['',[Validators.required,Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,25}$")]],
+      curso_retrasada:[9],
+      colegio_procedencia:['',[Validators.required,Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}$")]],
       curso_procedencia:['',[Validators.required]],
       fecha_procedencia:['',Validators.required]
     });
@@ -496,8 +496,6 @@ this.formEnviado=true
 
   }
 }
-
-
 
 /**VALIDACION CAMPOS DEL FORMULARIO */
 campoNoValido(campo:string){
