@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatriculaService } from '../../services/matricula.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  metricas:any;
+
+  constructor(private matriculaService:MatriculaService) { }
 
   ngOnInit(): void {
 
-
+    this.matriculaService.metricas(2022).subscribe((resp:any)=>{
+      this.metricas = resp.metricas;
+      console.log(this.metricas)
+    })
   }
 
 }

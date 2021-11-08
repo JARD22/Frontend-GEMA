@@ -9,15 +9,11 @@
                 <hr>
                 <div class="input-style-1">
                     <label>Nombre</label>
-                    <input type="text" placeholder="Nombre" disabled="true"/>
+                    <input type="text" placeholder="Nombre" disabled="true" [value]="usuario.nombre"/>
                 </div>
                 <div class="input-style-1">
-                    <label>Telefono</label>
-                    <input type="text" placeholder="Telefono" disabled="true"/>
-                </div>
-                <div class="input-style-1">
-                    <label>Correo Electronico</label>
-                    <input type="text" placeholder="Correo" disabled="true"/>
+                    <label>Correo</label>
+                    <input type="text" placeholder="" disabled="true"  [value]="usuario.correo"/>
                 </div>
             </div>
             <div class="col-lg-6 ">
@@ -44,32 +40,40 @@
               <h5 class="modal-title" id="exampleModalLabel">Cambio de contraseña</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form [formGroup]="cambioPassForm" (ngSubmit)="cambioPwd()">
             <div class="modal-body">
-              <form>
+              
                 <div class="input-style-1">
                     <label>Contraseña Actual</label>
-                    <input type="password" placeholder="Contraseña actual" />
+                    <input type="password" placeholder="Contraseña actual" formControlName="contrasenaAnterior" />
+                    <small *ngIf="contrasenaIncorrecta"  class="text-danger">Contraseña incorrecta</small>
                 </div>
                 <div class="input-style-1">
                     <label>Nueva Contraseña</label>
-                    <input type="password" placeholder="Nueva Contraseña" />
+                    <input type="password" placeholder="Nueva Contraseña" formControlName="contrasenaNueva"/>
                 </div>
                 <div class="input-style-1">
                     <label>Confirmar Contraseña</label>
-                    <input type="password" placeholder="Confirmar" />
+                    <input type="password" placeholder="Confirmar" formControlName="confirmarContrasena"/>
+                    <small class="text-danger" *ngIf="contrasenasNoValidas()">Contraseñas deben ser iguales</small>
                 </div>
     
+                <small>La contraseña debe contener almenos: 8 caracteres y Aa-Zz09!"#$% </small>
               
-              </form>
               <div class="alert-box primary-alert pl-100">
               
               
               </div>
             </div>
             <div class="modal-footer">
+              
+
+
+
               <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn primary-btn">Confirmar</button>
+              <button type="submit" class="btn primary-btn">Confirmar</button>
             </div>
+          </form>
           </div>
         </div>
       </div>

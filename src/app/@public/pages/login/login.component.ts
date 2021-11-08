@@ -18,6 +18,11 @@ export class LoginComponent  {
               private router:Router) { }
 
     formEnviado:boolean=false;
+    formEnviadoc:boolean=false;
+
+correoForm:FormGroup=this.fb.group({
+  correo:['',[Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),Validators.minLength(3)]]
+})
 
   loginForm:FormGroup = this.fb.group({
     usuario:[''||localStorage.getItem('correo'),[Validators.required,Validators.email]],
@@ -42,14 +47,35 @@ login(){
   }
 }  
   
+recuperarPass(){
+  this.formEnviadoc=true
+
+  if (this.correoForm.valid && this.formEnviadoc) {
+    
+    this.usuarioService.recuperarContrasena(this.correoForm.value).subscribe((resp:any)=>{
+      Swal.fire('Hecho',resp.msg,'success');
+      this.formEnviadoc=false;
+      this.correoForm.reset();
+    },(error:any)=>{Swal.fire('Error',error.error.msg,'error')})
+  }
+}
+
 campoNoValido(campo:string):boolean{
   if (this.loginForm.get(campo).invalid && this.formEnviado){
   return true
   }else{
     return false
   }
-
 }  
 
+campoNoValidoC(campo:string):boolean{
+  if (this.correoForm.get(campo).invalid && this.formEnviadoc){
+    
+  return true
+  }else{
+    return false
+  }
+
+}
 
 }

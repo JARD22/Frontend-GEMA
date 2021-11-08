@@ -1,5 +1,5 @@
 <div class="col-12">
-    <div class="row">
+    <div class="row" *ngIf="metricas">
                 
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30 shadow-sm p-3 mb-5 bg-body rounded">
@@ -8,7 +8,7 @@
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Total Matricula</h6>
-                  <h3 class="text-bold mb-10">1000</h3>
+                  <h3 class="text-bold mb-10">{{metricas[0].out_total_matricula}}</h3>
                   <p class="text-sm text-success">
                   </p>
                 </div>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Matricula Jardín</h6>
-                  <h3 class="text-bold mb-10">300</h3>
+                  <h3 class="text-bold mb-10">{{metricas[0].out_total}}</h3>
                   <p class="text-sm text-success">
                     <!-- <i class="lni lni-arrow-up"></i> +5
                     <span class="text-gray">Increased</span> -->
@@ -40,7 +40,7 @@
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Matricula Escuela</h6>
-                  <h3 class="text-bold mb-10">400</h3>
+                  <h3 class="text-bold mb-10">{{metricas[1].out_total}}</h3>
                   <p class="text-sm text-danger">
                     <!-- <i class="lni lni-arrow-down"></i> -2.00%
                     <span class="text-gray">Expense</span> -->
@@ -57,7 +57,7 @@
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Matricula Colegio</h6>
-                  <h3 class="text-bold mb-10">300</h3>
+                  <h3 class="text-bold mb-10">{{metricas[2].out_total}}</h3>
                   <p class="text-sm text-danger">
                     <!-- <i class="mdi mdi-face-man-shimmer"></i>
                     <span class="text-gray"> </span> -->

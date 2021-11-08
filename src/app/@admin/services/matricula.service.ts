@@ -45,4 +45,9 @@ export class MatriculaService {
   nuevaMatricula(formData:any){
    return this.http.post(`${this.url}/matricula/nueva-matricula`,formData,this.headers)
   }
+
+  metricas(anio:any){
+    return this.http.get(`${this.url}/matricula/metricas/${anio}`,this.headers)
+  }
+
 }

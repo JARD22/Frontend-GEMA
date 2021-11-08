@@ -20,142 +20,36 @@
                       <th><h6>#</h6></th>
                       <th><h6>Nombre</h6></th>
                       <th><h6>Estado</h6></th>
-                      <th><h6>Rol</h6></th>
                       <th><h6>Acción</h6></th>
                     </tr>
                     <!-- end table row-->
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let usuario of listaUsuarios; let i =index;">
                       <td>
                         <div class="min-width">
-                        <p>1</p>
+                        <p>{{i+1}}</p>
                         </div>
                       </td>
                       <td class="min-width">
-                        <p>Esther Howard</p>
+                        <p>{{usuario.out_nombre}}</p>
                       </td>
                       <td class="min-width">
-                        <p>Activo</p>
+                        <p>{{usuario.out_estado}}</p>
                       </td>
-
-                      <td class="min-width">
-                        <p>MATRICULA_ROL</p>
-                      </td>
+            
                       
                         <td class="min-width">
                           <span class="status-btn light-btn pointer"
                                 data-bs-toggle="modal" 
                                 data-bs-target="#exampleModal"
+                                (click)="asignarDatos(usuario.out_cod_usuario)"
                                 data-bs-whatever="@mdo">
                               <i class="mdi mdi-pencil"></i>
                             </span>
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>2</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>Esther Howard</p>
-                      </td>
-                      <td class="min-width">
-                        <p>Activo</p>
-                      </td>
-
-                      <td class="min-width">
-                        <p>MATRICULA_ROL</p>
-                      </td>
-                      
-                        <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>3</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>Esther Howard</p>
-                      </td>
-                      <td class="min-width">
-                        <p>Activo</p>
-                      </td>
-
-                      <td class="min-width">
-                        <p>REPORTES_ROL</p>
-                      </td>
-                      
-                        <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>4</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>Esther Howard</p>
-                      </td>
-                      <td class="min-width">
-                        <p>Activo</p>
-                      </td>
-
-                      <td class="min-width">
-                        <p>MATRICULA_ROL</p>
-                      </td>
-                      
-                        <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="min-width">
-                        <p>5</p>
-                        </div>
-                      </td>
-                      <td class="min-width">
-                        <p>Esther Howard</p>
-                      </td>
-                      <td class="min-width">
-                        <p>Activo</p>
-                      </td>
-
-                      <td class="min-width">
-                        <p>ADMIN_ROL</p>
-                      </td>
-                      
-                        <td class="min-width">
-                          <span class="status-btn light-btn pointer"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">
-                              <i class="mdi mdi-pencil"></i>
-                            </span>
-                      </td>
-                    </tr>
+                  
                    
                     <!-- end table row -->
 
@@ -168,8 +62,8 @@
   
               <div class="row">
                   <div class="col">
-                      <a href="#0" class="main-btn light-btn rounded-md btn-hover mr-5">Anterior</a>
-                      <a href="#0" class="main-btn light-btn rounded-md btn-hover">Siguiente</a>
+                      <button type="button" class="main-btn light-btn rounded-md btn-hover mr-5" (click)="cambiarPagina(-10)">Anterior</button>
+                      <button type="button"  class="main-btn light-btn rounded-md btn-hover" (click)="cambiarPagina(10)">Siguiente</button>
                   </div>
               </div>
 
@@ -186,43 +80,31 @@
           <h5 class="modal-title" id="exampleModalLabel">Contrato</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form [formGroup]="usuarioForm" (ngSubmit)="enviarForm()">
         <div class="modal-body">
-          <form>
+       
             <div class="input-style-1">
                 <label>Nombre</label>
-                <input type="text" placeholder="Nombre" disabled="True"/>
+                <input type="text" placeholder="Nombre" formControlName="nombre"/>
             </div>
-            <div class="select-style-1">
+                    <div class="select-style-1">
 
                 <div class="select-position">
-                    <select>
-                        <option value="">Selecciona un rol</option>
-                        <option value="">ADMIN_ROLE</option>
-                        <option value="">MATRICULA_ROL</option>
-                        <option value="">REPORTES_ROL</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="select-style-1">
-
-                <div class="select-position">
-                    <select>
+                    <select formControlName="cod_estado">
                         <option value="">Selecciona un Estado</option>
-                        <option value="">Activo</option>
-                        <option value="">Inactivo</option>
-                    
-
+                        <option *ngFor="let estado of listaEstados" [value]="estado.out_cod_estado">{{estado.out_nombre}}</option>
                     </select>
                 </div>
             </div>
-          </form>
+        
         </div>
         <div class="modal-footer">
           <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn primary-btn">Guardar</button>
+          <button type="submit" class="btn primary-btn">Guardar</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
+
 

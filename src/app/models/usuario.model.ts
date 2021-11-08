@@ -3,7 +3,6 @@ export class Usuario{
         public id:number,
         public correo:string,
         public nombre:string,
-        public rol:string,
         public intentos:string,
     ){
 

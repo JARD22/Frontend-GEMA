@@ -31,7 +31,7 @@
               >
                 <div class="profile-info">
                   <div class="info">
-                    <h6>Admin</h6>
+                    <h6>{{usuario.nombre}}</h6>
                   
                   </div>
                 </div>
@@ -46,7 +46,7 @@
                   <a [routerLink]="['/admin/cuenta']"> <i class="mdi mdi-cog"></i>Configuración</a>
                 </li>
                 <li>
-                  <a [routerLink]="['/login']"> <i class="lni lni-exit"></i> Cerrar Sesión </a>
+                  <a [routerLink]="['/login']" (click)="cerrarSesion()"> <i class="lni lni-exit"></i> Cerrar Sesión </a>
                 </li>
               </ul>
             </div>

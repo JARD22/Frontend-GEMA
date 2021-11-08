@@ -333,7 +333,7 @@ if (this.matriculaForm.get('doc_pendiente').value==true) {
     ['',new Cell(new Txt(this.matriculaForm.get('desc_doc').value).fontSize(11).alignment('justify').end).rowSpan(3).end],
     [new Cell(new Txt('Descipción').bold().alignment('center').end).end,''],
     ['','']
-  ]).widths([150,'*']).layout('noBorders').pageBreak('after').end);
+  ]).widths([150,'*']).layout('noBorders').end);
 }
 
 /**
