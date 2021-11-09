@@ -46,8 +46,17 @@ export class MatriculaService {
    return this.http.post(`${this.url}/matricula/nueva-matricula`,formData,this.headers)
   }
 
-  metricas(anio:any){
-    return this.http.get(`${this.url}/matricula/metricas/${anio}`,this.headers)
+  metricas(anio:string,tipo:number,offset:number){
+
+    return this.http.get(`${this.url}/matricula/metricas/${anio}/${tipo}/${offset}`)
+  }
+
+  actualizarDoc(formData){
+    return this.http.patch(`${this.url}/matricula/actualizar-datos`,formData,this.headers);
+  }
+
+  docDNI(anio:string,tipo:number,dni:string){
+    return   this.http.get(`${this.url}/matricula/doc-dni/${anio}/${tipo}/${dni}`)
   }
 
 }

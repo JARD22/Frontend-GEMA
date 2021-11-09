@@ -1,5 +1,5 @@
 <div class="col-12">
-    <div class="row" *ngIf="metricas">
+    <div class="row" *ngIf="data">
                 
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30 shadow-sm p-3 mb-5 bg-body rounded">
@@ -7,7 +7,7 @@
                   <i class="mdi mdi-account-group"></i>
                 </div>
                 <div class="content">
-                  <h6 class="mb-10">Total Matricula</h6>
+                  <h6 class="mb-10">Total Matricula <small>({{anio}})</small></h6>
                   <h3 class="text-bold mb-10">{{metricas[0].out_total_matricula}}</h3>
                   <p class="text-sm text-success">
                   </p>
@@ -74,187 +74,96 @@
         <div class="row">
             <div class="col-lg-12">
               <div class="card-style mb-30 shadow-sm p-3 mb-5 bg-body rounded">
-                <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                    <div class="left">
-                      <h6 class="text-medium mb-30">Matricula</h6>
-                    </div>
-                    <div class="right">
-
-
-                      <div class="select-style-1">
-                        <div class="select-position select-sm">
-                          <select class="light-bg">
-                            <option value="">Jardín de niños</option>
-                            <option value="">Escuela</option>
-                            <option value="">Colegio</option>
-                          </select>
+               
+                
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h6 class="text-medium mb-30 float-start">Matricula</h6>
+                  </div>
+                </div>
+                <form [formGroup]="filtrosForm">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="input-style-1 input-sm">
+                          <input type="text" placeholder="Nombre Alumno" (keyup)="buscarPorDni($event.target.value)"/>
                         </div>
                       </div>
-                      <!-- end select -->
+                      <div class="col-lg-4" *ngIf="tipo_matricula">
+                         <div class="select-style-1">
+                        <div class="select-position select-md">
+                          <select class="light-bg" formControlName="cod_tipo" (change)="filtros()">
+                           <option *ngFor="let tipo of tipo_matricula" [value]="tipo.out_cod_tipo">{{tipo.out_nombre}}</option>
+                          </select>
+                        </div>
+                      </div></div>
+                      <div class="col-lg-4">
+                       
+                        <div class="select-style-1">
+                          <div class="select-position select-md">
+                            <select class="light-bg" formControlName="aniof" (change)="filtros()">
+                              <option *ngFor="let anio of AniosMatricula" [value]="anio" >{{anio}}</option>
+                            </select>
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
-                  </div>
-                <div class="table-wrapper table-responsive">
+                  </form>
+              
+    
+                <div class="table-wrapper table-responsive" *ngIf="lista_doc">
                   <table class="table">
                     <thead>
                       <tr>
                         <th><h6>#</h6></th>
                         <th><h6>Nombre</h6></th>
-                        <th><h6>Encargado</h6></th>
-                        <th><h6>Tipo</h6></th>
+                        <th><h6>curso</h6></th>
                         <th><h6>Documentación</h6></th>
                         <th><h6>Editar</h6></th>
                       </tr>
                       <!-- end table row-->
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr *ngFor="let doc of lista_doc;let i= index;">
                         <td>
                           <div class="min-width">
-                          <p>1</p>
+                          <p>{{i+1}}</p>
                           </div>
                         </td>
                         <td class="min-width">
-                          <p>Esther Howard</p>
+                          <p>{{doc.out_nombre}}</p>
                         </td>
                         <td class="min-width">
-                          <p><a href="#0">Esther Howard</a></p>
+                          <p><a >{{doc.out_cuso}}</a></p>
                         </td>
+                       
                         <td class="min-width">
-                          <p>Colegio</p>
-                        </td>
-                        <td class="min-width">
-                          <span class="status-btn info-btn">Pendiente</span>
+                          <span *ngIf="doc.out_doc_pendiente==true" class="status-btn info-btn">Pendiente</span>
+                          <span *ngIf="doc.out_doc_pendiente==false" class="status-btn primary-btn">Completa</span>
                         </td>
                         <td>
                           <div class="action">
-                            <button class="text-primary">
+                            <button class="text-primary"
+                            type="button" 
+                            data-bs-toggle="modal" 
+                            (click)="asignarDatos(doc.out_cod_matricula)"
+                            data-bs-target="#exampleModal">
                               <i class="mdi mdi-pencil-outline"></i>
                             </button>
                           </div>
                         </td>
                       </tr>
-                      <!-- end table row -->
-
-                      <tr>
-                        <td>
-                          <div class="min-width">
-                          <p>2</p>
-                          </div>
-                        </td>
-                        <td class="min-width">
-                          <p>Esther Howard</p>
-                        </td>
-                        <td class="min-width">
-                          <p><a href="#0">Esther Howard</a></p>
-                        </td>
-                        <td class="min-width">
-                          <p>Escuela</p>
-                        </td>
-                        <td class="min-width">
-                          <span class="status-btn info-btn">Pendiente</span>
-                        </td>
-                        <td>
-                          <div class="action">
-                            <button class="text-primary">
-                              <i class="mdi mdi-pencil-outline"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <!-- end table row -->
-                      <tr>
-                        <td>
-                          <div class="min-width">
-                          <p>3</p>
-                          </div>
-                        </td>
-                        <td class="min-width">
-                          <p>Esther Howard</p>
-                        </td>
-                        <td class="min-width">
-                          <p><a href="#0">Esther Howard</a></p>
-                        </td>
-                        <td class="min-width">
-                          <p>Jardín de niños</p>
-                        </td>
-                        <td class="min-width">
-                          <span class="status-btn primary-btn">Completa</span>
-                        </td>
-                        <td>
-                          <div class="action">
-                            <button class="text-primary">
-                              <i class="mdi mdi-pencil-outline"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <!-- end table row -->
-                      <tr>
-                        <td>
-                          <div class="min-width">
-                          <p>4</p>
-                          </div>
-                        </td>
-                        <td class="min-width">
-                          <p>Esther Howard</p>
-                        </td>
-                        <td class="min-width">
-                          <p><a href="#0">Esther Howard</a></p>
-                        </td>
-                        <td class="min-width">
-                          <p>Ecuela</p>
-                        </td>
-                        <td class="min-width">
-                          <span class="status-btn info-btn">Pendiente</span>
-                        </td>
-                        <td>
-                          <div class="action">
-                            <button class="text-primary">
-                              <i class="mdi mdi-pencil-outline"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <!-- end table row -->
-                      <tr>
-                        <td>
-                          <div class="min-width">
-                          <p>5</p>
-                          </div>
-                        </td>
-                        <td class="min-width">
-                          <p>Esther Howard</p>
-                        </td>
-                        <td class="min-width">
-                          <p><a href="#0">Esther Howard</a></p>
-                        </td>
-                        <td class="min-width">
-                          <p>Colegio</p>
-                        </td>
-                        <td class="min-width">
-                          <span class="status-btn primary-btn">Completa</span>
-                        </td>
-                        <td>
-                          <div class="action">
-                            <button class="text-primary">
-                              <i class="mdi mdi-pencil-outline"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <!-- end table row -->
-
-                     
+                      <!-- end table row -->                     
                     </tbody>
                   </table>
                   <!-- end table -->
                
                 </div>
 
-                <div class="row">
+                <div class="row" *ngIf="botones">
                     <div class="col">
-                        <a href="#0" class="main-btn light-btn rounded-full btn-hover mr-5">Anterior</a>
-                        <a href="#0" class="main-btn light-btn rounded-full btn-hover">Siguiente</a>
+                        <button type="button" (click)="cambiarPagina(-10)" class="main-btn light-btn rounded-full btn-hover mr-5">Anterior</button>
+                        <button type="button" (click)="cambiarPagina(10)" class="main-btn light-btn rounded-full btn-hover">Siguiente</button>
                     </div>
                 </div>
               </div>
@@ -264,3 +173,50 @@
           </div>
           <!-- end row -->
     </div>
+
+     <!-- MODAL CAMBIO DE CONTRASEÑA  -->
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Documentación Pendiente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form  [formGroup]="docForm" (ngSubmit)="enviarForm()">
+          <div class="modal-body">
+            
+            <div class="form-check checkbox-style mb-20 mt-2">
+              <input class="form-check-input" type="checkbox"
+                      
+                      formControlName="doc_pendiente"
+                     value="" id="checkbox-1"
+                      />
+              <label class="form-check-label" for="checkbox-1">
+                  Documentación Pendiente</label>
+          </div>
+
+          <div class="input-style-3">
+            <textarea placeholder="Documentación" rows="5" formControlName="desc_doc"></textarea>
+            <span class="icon"><i class="lni lni-text-format"></i></span>
+            <small class="text-danger" *ngIf="campoNoValido('desc_doc')">campo requerido o no válido</small>
+            
+        </div>
+                        
+        <small>*Los cambios se guardan al confirmar*</small>
+            <div class="alert-box primary-alert pl-100">
+            
+            
+            </div>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn light-btn" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn primary-btn">Confirmar</button>
+          </div>
+        </form>
+
+        </div>
+      </div>
+    </div>
+      <!-- FIN MODAL CAMBIO DE CONTRASEÑA  -->
+  
