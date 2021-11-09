@@ -19,17 +19,14 @@
               <a class="btn btn-danger btn-sm  rounded-md btn-hover "> <i 
                  class="mdi mdi-download"></i> PDF</a>
 
-              <a class="btn btn-sm btn-success rounded-md btn-hover ml-5 "><i
-                 class="mdi mdi-file-excel"></i>Excel</a>
+           
             </td>
           </tr>
           <tr>
             <th scope="row">2</th>
             <td>Matricula Escuela y Kinder</td>
             <td>
-              <a class="btn btn-danger btn-sm  rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</a>
-              <a class="btn btn-sm btn-success rounded-md btn-hover ml-5 "><i
-                  class="mdi mdi-file-excel"></i>Excel</a>
+              <a class="btn btn-danger btn-sm  rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</a>             
             </td>
           </tr>
 
@@ -46,38 +43,50 @@
       <h2 class="mb-3">Directorios Telefónicos</h2>
 
       <div class="row">
-        <div class="col-lg-4">
+
+        <div class="col-lg-3">
           <div class="select-style-1">
-            <label>Curso</label>
+            <label>Año</label>
             <div class="select-position">
-                <select>
+                <select (change)="asignarAnio($event.target.value)">
                     <option value="">Selecciona una opción</option>
-                    <option value="">Todos</option>
-                    <option value="">Septimo</option>
-                    <option value="">Octavo</option>
-                    <option value="">Noveno</option>
+                    <option *ngFor="let anio of Anios" [value]="anio">{{anio}}</option>
+                    
                 </select>
             </div>
         </div>
         </div>
         <div class="col-lg-4">
+          <div class="select-style-1" *ngIf="cursoBloqueado">
+            <label>Curso</label>
+            <div class="select-position">
+                <select (change)="asignarCurso($event.target.value)">
+                    <option value="">Selecciona una opción</option>
+                    <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
+                  
+                </select>
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-3">
           <div class="select-style-1">
             <label>Sección</label>
             <div class="select-position">
-                <select>
+                <select (change)="asignarSeccion($event.target.value)">
                     <option value="">Selecciona una opción</option>
-                    <option value="">A</option>
-                    <option value="">B</option>
-                    <option value="">C</option>
+                    <option *ngFor="let seccion of secciones" [value]="seccion.out_cod_seccion">{{seccion.out_nombre}}</option>
+                    
+                    
                 </select>
             </div>
         </div>
         </div>
-        <div class="col-lg-4">
+     
+        <div class="col-lg-2">
           <div class="input-style-1">
             <label >Exportar</label>
             <!-- <a class="main-btn btn-sm danger-btn rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</a> -->
-            <a class="btn btn-danger btn-sm  rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</a>
+            <button type="button" (click)="generarPDF()"class="btn btn-danger btn-sm  rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</button>
           </div>
         </div>
       </div>

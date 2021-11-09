@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { PantallasRolComponent } from '../pages/pantallas-rol/pantallas-rol.component';
-import { Observable } from 'rxjs';
-import { PersonaComponent } from '../pages/persona/persona.component';
+
 
 @Injectable({
   providedIn: 'root'
