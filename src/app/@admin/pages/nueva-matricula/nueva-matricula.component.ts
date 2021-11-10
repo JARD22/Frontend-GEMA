@@ -300,12 +300,12 @@ pdf.add(new Table([
   [new Cell(new Txt('DATOS ADICIONALES').bold().alignment('center').end).colSpan(3).fillColor('gray').end,' ',' '],
 ]).widths(['*','*','*']).layout('noBorders').end);
 
-pdf.add(new Table([
-  [' ',' ',' '],
-  [new Cell(new Txt('ESTUDIOS REALIZADOS').bold().alignment('left').end).colSpan(3).end,'',''],
-  [new Cell(new Txt('Instituto').bold().alignment('center').end).end,new Cell(new Txt('Curso').bold().alignment('center').end).end,new Cell(new Txt('Año').bold().alignment('center').end).end],
-  [' ',' ',' ']
-]).widths(['*','*',45]).layout('noBorders').end);
+// pdf.add(new Table([
+//   [' ',' ',' '],
+//   [new Cell(new Txt('ESTUDIOS REALIZADOS').bold().alignment('left').end).colSpan(3).end,'',''],
+//   [new Cell(new Txt('Instituto').bold().alignment('center').end).end,new Cell(new Txt('Curso').bold().alignment('center').end).end,new Cell(new Txt('Año').bold().alignment('center').end).end],
+//   [' ',' ',' ']
+// ]).widths(['*','*',45]).layout('noBorders').end);
 
 if (this.matriculaForm.get('materia_retrasada_chk').value==true) {
   

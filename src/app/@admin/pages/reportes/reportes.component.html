@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <th scope="row">1</th>
             <td>Matricula Colegio</td>
             <td>
@@ -21,12 +21,16 @@
 
            
             </td>
-          </tr>
+          </tr> -->
           <tr>
-            <th scope="row">2</th>
-            <td>Matricula Escuela y Kinder</td>
+            <th scope="row">1</th>
+            <td>Matricula Jardin, Escuela, Colegio</td>
             <td>
-              <a class="btn btn-danger btn-sm  rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</a>             
+              <button class="btn btn-info btn-sm  rounded-md btn-hover "(click)="matriculaDiaria()">Cargar Datos</button>
+              
+              <button *ngIf="datosCargados"  
+                       class="btn btn-danger btn-sm  rounded-md btn-hover"
+                       (click)="generarPDFMatricula()"> <i class="mdi mdi-download"></i> PDF</button>             
             </td>
           </tr>
 
