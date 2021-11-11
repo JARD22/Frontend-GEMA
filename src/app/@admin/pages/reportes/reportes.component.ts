@@ -26,13 +26,15 @@ export class ReportesComponent implements OnInit {
   seccion:any;
   cursoNombre:any;
   seccionNombre:any;
-  directorio:any;
+  nombres:any;
+  numeros:any;
   matricula:any[]=[];
   nuevo:number=0;
   reingreso:number=0;
   datosCargados:boolean=false;
   totalesTipo:any;
   grupos:any[]=[];
+  numerosT:any[]=[]; 
   
 
   constructor(private matriculaService:MatriculaService,
@@ -80,7 +82,8 @@ asignarSeccion(s){
     this.seccionNombre= this.secciones.find(v=>v.out_cod_seccion==s).out_nombre
   
 this.reportesService.directorio(this.anio,this.curso,s).subscribe((resp:any)=>{
-  this.directorio =resp.data
+  this.nombres =resp.nombres
+  this.numeros=resp.numeros
 
 })
   }else{
@@ -117,21 +120,24 @@ async generarPDF(){
   )
 
 pdf.add(new Table([
-  [new Cell(new Txt(`N.`).fontSize(11).bold().end).rowSpan(2).end,new Cell(new Txt(`Nombre Alumno(a)`).fontSize(11).alignment('center').bold().end).rowSpan(2).end,new Cell(new Txt('Telefonos').fontSize(11).alignment('center').bold().end).colSpan(2).end,''],
-  ['','',new Cell(new Txt('Whatsapp').alignment('center').end).end,new Cell(new Txt('Otros').alignment('center').end).end]
-]).widths([12,200,140,140]).end)
+  [new Cell(new Txt(`N.`).fontSize(11).bold().end).end,
+  new Cell(new Txt(`Nombre Alumno(a)`).fontSize(11).alignment('center').bold().end).end,
+  new Cell(new Txt('Telefonos').fontSize(11).alignment('center').bold().end).colSpan(2).end,''],
+]).widths([12,240,140,100]).end)
 
-for (let i = 0; i < this.directorio.length; i++) {
+for (let i = 0; i < this.nombres.length; i++) {
 
-    let whatsapp = this.directorio[i].out_whatsapp.map(w=>w.telefonos)
-    let otros = this.directorio[i].out_telefonos.map(w=>w.telefonos)
+let numeros=[]
 
+ this.numeros.map(x=>x.out_telefono_grupo==this.nombres[i].out_grupo? x.out_telefonos.forEach(x =>numeros.push(x.telefono)):x)
+  
   pdf.add(new Table([
-    [new Cell(new Txt(`${i+1}`).fontSize(11).bold().end).end,new Cell(new Txt(`${this.directorio[i].out_nombre}`).fontSize(11).alignment('left').bold().end).end,new Cell(new Txt(`${whatsapp.toString()}`).fontSize(11).alignment('center').end).end,new Cell(new Txt(`${otros.toString()}`).fontSize(11).alignment('center').end).end]
-  ]).widths([12,200,140,140]).end)
+    [new Cell(new Txt(`${i+1}`).fontSize(10).end).end,new Cell(new Txt(`${this.nombres[i].out_nombre}`).fontSize(11).alignment('left').end).end,
+    new Cell(new Txt(`${numeros.toString()}`).fontSize(10).alignment('center').end).colSpan(2).end,
+  ]
+  ]).widths([12,240,140,100]).end)
+  numeros=[]
 
-whatsapp=[]
-otros=[]
   
 }
   pdf.create().open();
@@ -239,6 +245,7 @@ this.datosCargados=true
 
   )}
   
+
 
   contarOcurrenciasTipoMatricula(datos) {
     if (!Array.isArray(datos)) {
