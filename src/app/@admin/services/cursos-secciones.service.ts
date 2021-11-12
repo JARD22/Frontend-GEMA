@@ -55,7 +55,7 @@ actualizarSeccion(formData){
 }
 
 unirSecciones(formData){
-  console.log('como putas no va a ser una funcion')
+
   return this.http.post(`${this.url}/cursos/unir-secciones`,formData,this.headers);
 }
 

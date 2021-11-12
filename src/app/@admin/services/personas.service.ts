@@ -31,7 +31,7 @@ export class PersonasService {
   }
 
   PersonaUsuario(formData){
-    console.log(formData)
+    
     return this.http.post(`${this.url}/personas/usuario`,formData,this.headers)
   }
 

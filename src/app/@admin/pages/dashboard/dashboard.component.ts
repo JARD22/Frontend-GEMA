@@ -77,7 +77,7 @@ cargarData(anio,tipo,offset){
     this.lista_doc=  resp.data
     this.lista_doc_b=[...this.lista_doc]
     this.data=true
-   
+  
   },(error:any)=>{
     Swal.fire('Advertencia',error.error.msg,'warning');
     this.data=false

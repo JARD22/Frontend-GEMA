@@ -29,8 +29,8 @@ export class ReportesService {
   }
 
 
-  matriculaDiaria(anio){
-    return this.http.get(`${this.url}/reportes/matricula-diaria/${anio}`)
+  matriculaDiaria(FI,FF){
+    return this.http.get(`${this.url}/reportes/matricula-diaria/${FI}/${FF}`)
   }
 
 

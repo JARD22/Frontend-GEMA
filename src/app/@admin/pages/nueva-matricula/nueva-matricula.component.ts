@@ -73,7 +73,7 @@ export class NuevaMatriculaComponent implements OnInit {
       motivo:[{disabled:true,value:''}],
       materia_retrasada_chk:[false],
       materia_retrasada:[''],
-      curso_retrasada:[9],
+      curso_retrasada:[1],
       colegio_procedencia:['',[Validators.required,Validators.pattern("^[A-Za-záéíóúÁÉÍÓÚñÑ ]{2,50}$")]],
       curso_procedencia:['',[Validators.required]],
       fecha_procedencia:['',Validators.required]
@@ -199,30 +199,28 @@ cargarSecciones(){
 
 /**MOSTRAR Y OCULAR CAMPOS EN LA VISTA DE CLIENTE */
 mostrarCampos(){
-this.matriculaForm.get('curso_retrasada').valueChanges.subscribe(c=>{
-  this.curso_retrasada= this.cursos.find(x=>x.out_cod_curso==c).out_nombre
-})
+// this.matriculaForm.get('curso_retrasada').valueChanges.subscribe(c=>{
+//   this.curso_retrasada= this.cursos.find(x=>x.out_cod_curso==c).out_nombre
+// })
 
    this.matriculaForm.get('materia_retrasada_chk').valueChanges.subscribe(v=>{
-     
      if (v==true) {
        this.retrasada=true
        //ASIGNANDO VALIDADORES PARA CAMPOS DINÁMICOS
        this.matriculaForm.get('materia_retrasada').setValidators([Validators.required,Validators.minLength(6)])
        this.matriculaForm.get('curso_retrasada').setValidators([Validators.required])
-       this.matriculaForm.get('materia_retrasada').updateValueAndValidity()
-       this.matriculaForm.get('curso_retrasada').updateValueAndValidity()
+    
      }else{
       this.retrasada=false
       //LIMPIANDO VALIDADORES
       this.matriculaForm.patchValue({'materia_retrasada':''});
-      this.matriculaForm.patchValue({'curso_retrasada':''});
+      this.matriculaForm.patchValue({'curso_retrasada':1});
       this.matriculaForm.get('materia_retrasada').clearValidators();
       this.matriculaForm.get('curso_retrasada').clearValidators();  
-      this.matriculaForm.get('materia_retrasada').updateValueAndValidity()
-       this.matriculaForm.get('curso_retrasada').updateValueAndValidity()
-     }
-   })
+    }
+    this.matriculaForm.get('materia_retrasada').updateValueAndValidity()
+     this.matriculaForm.get('curso_retrasada').updateValueAndValidity()
+  })
 
   }
 
@@ -492,7 +490,11 @@ this.formEnviado=true
     Swal.fire('Hecho',resp.msg,'success')
     this.formEnviado=false
     this.matriculaForm.reset();
-  },(error:any)=>{Swal.fire('Error',error.error.msg,'error')})
+  },(error:any)=>{
+   
+    Swal.fire('Error',error.error.msg,'error')
+    this.formEnviado=false
+  })
 
   }
 }

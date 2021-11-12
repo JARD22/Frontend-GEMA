@@ -200,7 +200,7 @@
           <div class="input-style-1">
             <label>Nombre Clase</label>
             <input type="text" placeholder="Nombre Clase" formControlName="materia_retrasada"/>
-            <small *ngIf="campoNoValido('materia_retrasada')" class="text-danger">Campo requerido o no válido</small>
+            <!-- <small *ngIf="campoNoValido('materia_retrasada')" class="text-danger">Campo requerido o no válido</small> -->
           </div>
         </div>
         <div class="col-lg-6" *ngIf="retrasada">
@@ -211,7 +211,7 @@
                 <option value="">Selecciona una opción</option>
                 <option *ngFor="let curso of cursos" [value]="curso.out_cod_curso">{{curso.out_nombre}}</option>
               </select>
-              <small *ngIf="campoNoValido('curso_retrasada')" class="text-danger">Campo requerido o no válido</small>
+              <!-- <small *ngIf="campoNoValido('curso_retrasada')" class="text-danger">Campo requerido o no válido</small> -->
             </div>
           </div>
         </div>
@@ -229,12 +229,12 @@
               class="main-btn active-btn rounded-md btn-hover float-end" 
                 >Guardar </button>
           </div>
-
-          <span>VALIDO</span>
-          <!-- <pre>{{matriculaForm.valid}}</pre>
+<!-- 
+           <span>VALIDO</span>
+           <pre>{{matriculaForm.valid}}</pre>
           <hr>
           <span>VALOR</span>
-          <pre>{{matriculaForm.value| json}}</pre> -->
+          <pre>{{matriculaForm.value| json}}</pre>  -->
         </div>
 
       </div>

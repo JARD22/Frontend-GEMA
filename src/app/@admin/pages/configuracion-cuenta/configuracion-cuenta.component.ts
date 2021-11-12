@@ -53,7 +53,7 @@ export class ConfiguracionCuentaComponent implements OnInit {
            
             this.cambioPassForm.reset();
           },(error:any)=>{
-            console.log(error);
+
             Swal.fire({
               icon:'error',
               title: "Error",
@@ -64,7 +64,7 @@ export class ConfiguracionCuentaComponent implements OnInit {
           }
         )
       } else {
-        console.log(this.cambioPassForm.value)
+ 
         // Swal.fire({
         //   icon:'warning',
         //   title: "Cuidado",

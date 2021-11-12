@@ -1,41 +1,54 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="card-style mb-30 shadow-sm p-3 mb-5 bg-body rounded">
-      <h2 class="mb-3">Reportes</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Exportar</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr>
-            <th scope="row">1</th>
-            <td>Matricula Colegio</td>
-            <td>
-              <a class="btn btn-danger btn-sm  rounded-md btn-hover "> <i 
-                 class="mdi mdi-download"></i> PDF</a>
-
-           
-            </td>
-          </tr> -->
-          <tr>
-            <th scope="row">1</th>
-            <td>Matricula Jardin, Escuela, Colegio</td>
-            <td>
-              <button class="btn btn-info btn-sm  rounded-md btn-hover "(click)="matriculaDiaria()">Cargar Datos</button>
+      <h2 class="mb-3">Reporte Matricula</h2>
+      
+      <form [formGroup]="fechasForm" (ngSubmit)="matriculaDiaria()">
+        <div class="row">
+          <div class="col-lg-4">
+            <br>
+            <br>
+            <h5>Matricula Jardí, Escuela, Colegio</h5>
+          </div>
+          <div class="col-lg-2">
+            <div class="input-style-2">
+              <label>Fecha Iinicial <small class="text-danger">*</small></label>
               
-              <button *ngIf="datosCargados"  
-                       class="btn btn-danger btn-sm  rounded-md btn-hover"
-                       (click)="generarPDFMatricula()"> <i class="mdi mdi-download"></i> PDF</button>             
-            </td>
-          </tr>
+              <input type="date"
+                     class="form-control"   
+                     formControlName="fechaI"      
+                     />
+              <span class="icon"><i class="lni lni-chevron-down"></i></span>
+              <!-- <small class="text-danger" *ngIf="campoNoValidoU('fecha_nacimiento')">campo requerido o no válido</small> -->
+          </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="input-style-2">
+              <label>Fecha Fecha final <small class="text-danger">*</small></label>
 
-        </tbody>
-      </table>
+              <input type="date"
+                     class="form-control"
+                     formControlName="fechaF"
+                     />
+              <span class="icon"><i class="lni lni-chevron-down"></i></span>
+              <!-- <small class="text-danger" *ngIf="campoNoValidoU('fecha_nacimiento')">campo requerido o no válido</small> -->
+          </div>
+          </div>
+          <div class="col-lg-4">
+            <br>
+            
+            <button type="submit" class="btn btn-info btn-sm  rounded-md btn-hover">Cargar Datos</button>
+
+            <button type="button"
+                    *ngIf="datosCargados"  
+                     class="btn btn-danger btn-sm  rounded-md btn-hover"
+                     (click)="generarPDFMatricula()"> <i class="mdi mdi-download"></i> PDF</button>   
+          </div>
+        </div>
+      </form>
+
+      
+      
 
     </div>
   </div>
@@ -85,14 +98,8 @@
             </div>
         </div>
         </div>
-        <div class="col-lg-2">
-          <div class="input-style-1">
-            <label >Cargar Datos</label>
-            <!-- <a class="main-btn btn-sm danger-btn rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</a> -->
-            <button type="button" (click)="generarPDF()"class="btn btn-danger btn-sm  rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</button>
-          </div>
-        </div>
-        <div class="col-lg-2">
+        
+        <div class="col-lg-4">
           <div class="input-style-1">
             <label >Exportar</label>
             <!-- <a class="main-btn btn-sm danger-btn rounded-md btn-hover "> <i class="mdi mdi-download"></i> PDF</a> -->

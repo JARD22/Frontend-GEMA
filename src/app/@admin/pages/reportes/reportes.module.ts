@@ -5,6 +5,7 @@ import { ReportesRoutingModule } from './reportes-routing.module';
 import { ReportesComponent } from './reportes.component';
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import { ReactiveFormsModule } from '@angular/forms';
 PdfMakeWrapper.setFonts(pdfFonts);
 
 
@@ -12,6 +13,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
   declarations: [ReportesComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ReportesRoutingModule,
       
   ]

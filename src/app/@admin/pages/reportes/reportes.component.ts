@@ -4,6 +4,8 @@ import { MatriculaService } from '../../services/matricula.service';
 import { CursosSeccionesService } from '../../services/cursos-secciones.service';
 import { ReportesService } from '../../services/reportes.service';
 import { map, tap } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -20,8 +22,10 @@ export class ReportesComponent implements OnInit {
   cursos:any[]=[];
   curso:number;
   Anios:any[]=[`${this.date.getFullYear()}`,`${this.date.getFullYear()+1}`]
+  AniosM:any[]=[`${this.date.getFullYear()}`,`${this.date.getFullYear()+1}`]
   secciones:any[]=[];
   anio:any;
+  anioM:any;
   cursoBloqueado:boolean=false
   seccion:any;
   cursoNombre:any;
@@ -35,17 +39,35 @@ export class ReportesComponent implements OnInit {
   totalesTipo:any;
   grupos:any[]=[];
   numerosT:any[]=[]; 
-  
+  fechasForm:FormGroup;
 
   constructor(private matriculaService:MatriculaService,
               private cursosService:CursosSeccionesService,
-              private reportesService:ReportesService){
+              private reportesService:ReportesService,
+              private fb:FormBuilder){
+
+
+              
 
   }
 
-
   ngOnInit():void{
+    this.fechasForm= this.fb.group({
+      fechaI:[`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`,Validators.required],
+      fechaF:['',Validators.required]
+    })
+
     this.cargarCursos();
+    this.fechasReporte()
+ 
+  }
+
+
+  fechasReporte(){
+this.fechasForm.get('fechaF').valueChanges.subscribe(FF=>{
+  let FI = this.fechasForm.get('fechaI').value
+  console.log(FI, FF)
+})
   }
 
   cargarCursos(){
@@ -63,10 +85,10 @@ if (!c) {
 this.cursoBloqueado=true
 }
 
+
 asignarCurso(c){
 this.curso=c
 this.cursoNombre = this.cursos.find(c=>c.out_cod_curso==this.curso).out_nombre
-console.log(this.cursoNombre)
 this.cargarSecciones()
 }
 
@@ -95,7 +117,6 @@ async generarPDF(){
   let pdf= new PdfMakeWrapper();
 
   //TAMAÑO OFICIO
-
   pdf.pageSize('LEGAL')
 
   pdf.info({
@@ -159,7 +180,8 @@ async generarPDFMatricula(){
   pdf.add( new Table([
     [new Cell(await new Img('../../../../assets/images/logo_agz.png').build()).alignment('left').rowSpan(3).end,' ',' '],
     [' ',new Cell(new Txt('CENTRO EDUCATIVO NO GUBERNAMENTAL ALFONSO GUILLEN ZELAYA').alignment('center').bold().end).end, ' '],
-    ['',new Cell(new Txt('REPORTE MATRICULA').alignment('center').end).end, ' ']
+    ['',new Cell(new Txt(`REPORTE MATRICULA`).alignment('center').end).end, ' '],
+    ['',new Cell(new Txt(`${this.fechasForm.get('fechaI').value} AL ${this.fechasForm.get('fechaF').value}`).bold().alignment('center').end).end, ' '],
   ]).widths([40,'*',10]).layout('noBorders').end);
        
 
@@ -208,9 +230,9 @@ pdf.add(new Table([
   [new Cell(new Txt('').end).colSpan(2).border([false,false,false,false]).end,''],
   [new Cell(new Txt('RESUMEN').alignment('center').bold().end).fillColor('gray').colSpan(2).end,''],
   [new Cell(new Txt('Tipo Matricula').alignment('left').bold().end).fillColor('gray').end,new Cell(new Txt('Total').alignment('left').bold().end).fillColor('gray').end],
-  [new Cell(new Txt('Jardín').alignment('left').bold().end).end,new Cell(new Txt(`${this.totalesTipo.JARDÍN}`).alignment('left').end).end],
-  [new Cell(new Txt('Escuela').alignment('left').bold().end).end,new Cell(new Txt(`${this.totalesTipo.ESCUELA}`).alignment('left').end).end],
-  [new Cell(new Txt('Colegio').alignment('left').bold().end).end,new Cell(new Txt(`${this.totalesTipo.COLEGIO}`).alignment('left').end).end],
+  [new Cell(new Txt('Jardín').alignment('left').bold().end).end,new Cell(new Txt(`${this.totalesTipo.JARDÍN || 0}`).alignment('left').end).end],
+  [new Cell(new Txt('Escuela').alignment('left').bold().end).end,new Cell(new Txt(`${this.totalesTipo.ESCUELA|| 0}`).alignment('left').end).end],
+  [new Cell(new Txt('Colegio').alignment('left').bold().end).end,new Cell(new Txt(`${this.totalesTipo.COLEGIO ||0}`).alignment('left').end).end],
   [new Cell(new Txt('TOTAL REINGRESO').alignment('left').bold().end).fillColor('gray').end,new Cell(new Txt(`${this.reingreso}`).alignment('left').end).end],
   [new Cell(new Txt('TOTAL NUEVO INGRESO').alignment('left').bold().end).fillColor('gray').end,new Cell(new Txt(`${this.nuevo}`).alignment('left').end).end]
 ]).widths([300,300]).end);
@@ -221,29 +243,34 @@ pdf.add(new Table([
 }
 
  matriculaDiaria(){
-  this.reportesService.matriculaDiaria('2022').subscribe(async(resp:any)=>{
-   this.matricula=resp.data
-    
-  let totalesTipo= await this.contarOcurrenciasTipoMatricula(this.matricula)
-  let AlmnGrupo= await this.contarOcurrenciasGrupo(this.matricula)
-  let gruposF = Object.entries(AlmnGrupo)    
 
-  this.grupos=gruposF;
-  for (let i = 0; i < this.matricula.length; i++) {
-  
-    if (this.matricula[i].colegio_anterior==='CENG ALFONSO GUILLEN ZELAYA') {
-     this.reingreso++
-   }else{
-     this.nuevo++
-    }
+
+  if (this.fechasForm.valid) {
+    this.reportesService.matriculaDiaria(this.fechasForm.get('fechaI').value,this.fechasForm.get('fechaF').value).subscribe(async(resp:any)=>{
+      this.matricula=resp.data
+       
+     let totalesTipo= await this.contarOcurrenciasTipoMatricula(this.matricula)
+     let AlmnGrupo= await this.contarOcurrenciasGrupo(this.matricula)
+     let gruposF = Object.entries(AlmnGrupo)    
+   
+     this.grupos=gruposF;
+     for (let i = 0; i < this.matricula.length; i++) {
+     
+       if (this.matricula[i].colegio_anterior==='CENG ALFONSO GUILLEN ZELAYA') {
+        this.reingreso++
+      }else{
+        this.nuevo++
+       }
+     }
+   
+   this.totalesTipo =totalesTipo  
+   this.datosCargados=true
+     },(error:any)=>{
+       Swal.fire('Advertencia',error.error.msg,'warning');
+       this.datosCargados=false
+      });
   }
-
-this.totalesTipo =totalesTipo  
-this.datosCargados=true
-  }
-
-
-  )}
+}
   
 
 

@@ -44,7 +44,7 @@ export class ColegiosComponent implements OnInit {
 
   cargarDatosColegio(id){
 
-    console.log(this.listaColegios[id])
+
    this.colegioForm.addControl('cod_colegio', new FormControl(''))
    this.colegioForm.patchValue({'cod_colegio':this.listaColegios[id].out_cod_coledio})
    this.colegioForm.patchValue({'nombre':this.listaColegios[id].out_nombre})
@@ -53,7 +53,7 @@ export class ColegiosComponent implements OnInit {
   }
 
   cambiarPagina(valor){
-    console.log(valor)
+ 
     this.desde+=valor
   
     if(this.desde<0){
@@ -89,7 +89,7 @@ export class ColegiosComponent implements OnInit {
         this.resetForm();
         this.formEnviado=false;
       },(error:any)=>{ 
-        console.log(error)
+      
         Swal.fire('Error',error.error.msg,'error');})
     }
   }
