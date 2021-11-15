@@ -50,6 +50,8 @@ export class NuevaMatriculaComponent implements OnInit {
   error_dni_alumno_msg:string='';
   error_dni_alumno:boolean=false;
 
+  resp_matricula:boolean=false;
+
   constructor(private matriculaService:MatriculaService,
               private cursosService:CursosSeccionesService,
               private fb:FormBuilder) {}
@@ -485,10 +487,12 @@ calcularEdad(fecha:string){
 
 nuevaMatricula(){
 this.formEnviado=true
+this.resp_matricula=true;
   if (this.matriculaForm.valid && this.formEnviado) {
   this.matriculaService.nuevaMatricula(this.matriculaForm.value).subscribe((resp:any)=>{
     Swal.fire('Hecho',resp.msg,'success')
     this.formEnviado=false
+    this.resp_matricula=false
     this.matriculaForm.reset();
   },(error:any)=>{
    

@@ -55,6 +55,7 @@ public usuario:UsuarioS;
 
                 const {id,correo,nombre,intentos}=resp.userObj
                 this.usuario = new Usuario(id,correo,nombre,intentos)
+                
               }),
               map(resp=>true)
             )

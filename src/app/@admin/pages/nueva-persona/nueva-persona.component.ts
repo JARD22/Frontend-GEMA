@@ -26,6 +26,7 @@ export class NuevaPersonaComponent implements OnInit {
        telefonosFamiliar:FormArray;
       
        formEnviado:boolean=false;
+       resp_persona:boolean=false;
 
   constructor(private personasService:PersonasService,
               private fb:FormBuilder) { 
@@ -218,6 +219,7 @@ enviarFormulario(){
 
   if (this.cod_tipo_persona.value==5) {    
     if (this.usuarioForm.valid) {
+      this.resp_persona=true;
       this.personasService.PersonaUsuario(this.usuarioForm.value).subscribe(
         (resp:any)=>{
           Swal.fire({
@@ -226,6 +228,7 @@ enviarFormulario(){
             text: resp.msg
           });
           this.usuarioForm.reset();
+          this.resp_persona=false;
           this.formEnviado=false
         },(error:any)=>{
           Swal.fire({
@@ -237,6 +240,7 @@ enviarFormulario(){
       )
     }
   } else if(this.cod_tipo_persona.value==4 && this.alumnoForm.valid) {
+    this.resp_persona=true;
     this.personasService.personaAlumno(this.alumnoForm.value).subscribe(
       (resp:any)=>{
         Swal.fire({
@@ -246,6 +250,7 @@ enviarFormulario(){
         });
         this.alumnoForm.reset()
         this.formEnviado=false
+        this.resp_persona=false;
       },(error:any)=>{
         Swal.fire({
           title: 'Error',
@@ -256,6 +261,7 @@ enviarFormulario(){
     )
   }else{
     if (this.familiarForm.valid) {
+      this.resp_persona=true;
       this.personasService.personaFamiliar(this.familiarForm.value).subscribe(
         (resp:any)=>{
           Swal.fire({
@@ -265,6 +271,7 @@ enviarFormulario(){
           });
           this.familiarForm.reset();
           this.formEnviado=false
+          this.resp_persona=false;
         },(error:any)=>{
           Swal.fire({
             title: 'Error',
